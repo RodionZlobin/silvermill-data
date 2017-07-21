@@ -15,6 +15,7 @@
         <module>silvermill-data-entity</module>
         <module>silvermill-data-dao</module>
         <module>silvermill-data-service</module>
+        <module>silvermill-data-service-impl</module>
     </modules>
 
     <dependencies>
