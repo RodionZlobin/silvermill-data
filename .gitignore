@@ -1,0 +1,21 @@
+#Ignore all .iml IntelliJ project files
+*.iml
+
+.svn/
+
+#Ignore everything under .idea
+.idea/
+
+#Exclude build directory
+target/
+
+#Exclude bower build directories
+webapp_build/
+node/
+node_modules/
+vendor/
+webapp_libs/
+assets/
+styles/
+scripts/
+modules/
