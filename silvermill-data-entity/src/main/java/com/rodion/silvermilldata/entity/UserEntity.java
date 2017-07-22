@@ -2,6 +2,7 @@ package com.rodion.silvermilldata.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -14,7 +15,9 @@ public class UserEntity {
     @Id
     private String id;
 
+    @Indexed(unique = true)
     private String username;
+
     private String password;
 
     public UserEntity(){
