@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
+ * @author Rodion
  */
 
 @Document(collection = "users")
@@ -14,6 +14,9 @@ public class UserEntity {
 
     @Id
     private String id;
+
+    @Indexed(unique = true)
+    private String userId;
 
     @Indexed(unique = true)
     private String username;
@@ -25,9 +28,18 @@ public class UserEntity {
     }
 
     @PersistenceConstructor
-    public UserEntity(String username, String password) {
+    public UserEntity(String userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

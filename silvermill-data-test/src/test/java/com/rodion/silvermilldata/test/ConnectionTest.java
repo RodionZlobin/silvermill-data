@@ -12,13 +12,16 @@ import org.springframework.core.io.ClassPathResource;
 import java.util.List;
 
 /**
- * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
+ * @author Rodion
  */
 public class ConnectionTest {
 
     //for best test use create / delete DB
 
+    /*
+
     public static ApplicationContext springContextRule = new ClassPathXmlApplicationContext(new ClassPathResource("silvermill-data-dao.xml").getPath());
+
 
     @Ignore //prepare clear DB
     @Test
@@ -48,4 +51,5 @@ public class ConnectionTest {
 
         Assert.assertEquals(2, usersFromDB.size());
     }
+     */
 }

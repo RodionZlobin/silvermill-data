@@ -11,5 +11,12 @@
 
     <artifactId>silvermill-data-dao-impl</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.rodion</groupId>
+            <artifactId>silvermill-data-dao</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>

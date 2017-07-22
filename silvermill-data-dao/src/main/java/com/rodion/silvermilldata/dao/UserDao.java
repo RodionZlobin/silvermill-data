@@ -4,7 +4,10 @@ import com.rodion.silvermilldata.entity.UserEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
+ * @author Rodion
  */
-public interface UserDao extends MongoRepository<UserEntity, String>{
+public interface UserDao extends GenericDao<UserEntity, String>{
+
+    UserEntity findByUserId(String userId);
+    UserEntity findByUsername(String username);
 }

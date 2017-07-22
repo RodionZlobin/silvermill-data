@@ -1,7 +1,7 @@
 package com.rodion.silvermilldata.domain;
 
 /**
- * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
+ * @author Rodion
  */
 public final class User {
     private String userId;
