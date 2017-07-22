@@ -14,6 +14,7 @@
         <module>silvermill-data-domain</module>
         <module>silvermill-data-entity</module>
         <module>silvermill-data-dao</module>
+        <module>silvermill-data-dao-impl</module>
         <module>silvermill-data-service</module>
         <module>silvermill-data-service-impl</module>
         <module>silvermill-data-test</module>
