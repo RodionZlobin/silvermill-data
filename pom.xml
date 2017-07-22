@@ -19,29 +19,51 @@
         <module>silvermill-data-test</module>
     </modules>
 
-    <dependencies>
+    <properties>
+        <silvermill.version>0.0.1-SNAPSHOT</silvermill.version>
+        <springframework.version>4.3.9.RELEASE</springframework.version>
+        <spring.mongo.version>1.10.4.RELEASE</spring.mongo.version>
+    </properties>
+
+
+    <dependencyManagement>
 
         <!-- Project dependencies -->
 
+        <dependencies>
+            <dependency>
+                <groupId>com.rodion</groupId>
+                <artifactId>silvermill-data-dao</artifactId>
+                <version>${silvermill.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rodion</groupId>
+                <artifactId>silvermill-data-entity</artifactId>
+                <version>${silvermill.version}</version>
+            </dependency>
 
+            <!-- Spring dependencies -->
 
-        <!-- Spring dependencies -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>${spring.mongo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
-            <version>1.10.4.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>4.3.9.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.9.RELEASE</version>
-        </dependency>
+    <dependencies>
+
     </dependencies>
 
 
