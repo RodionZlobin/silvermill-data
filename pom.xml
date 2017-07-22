@@ -6,8 +6,8 @@
 
     <groupId>com.rodion</groupId>
     <artifactId>silvermill-data</artifactId>
-    <packaging>pom</packaging>
 
+    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
@@ -16,29 +16,31 @@
         <module>silvermill-data-dao</module>
         <module>silvermill-data-service</module>
         <module>silvermill-data-service-impl</module>
+        <module>silvermill-data-test</module>
     </modules>
 
     <dependencies>
 
         <!-- Project dependencies -->
 
-        <dependency>
-            <groupId>com.rodion</groupId>
-            <artifactId>silvermill-data-domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.rodion</groupId>
-            <artifactId>silvermill-data-entity</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
-        <!-- Mongo dependencies -->
+
+        <!-- Spring dependencies -->
 
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
             <version>1.10.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.9.RELEASE</version>
         </dependency>
     </dependencies>
 
