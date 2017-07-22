@@ -11,5 +11,12 @@
 
     <artifactId>silvermill-data-entity</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>

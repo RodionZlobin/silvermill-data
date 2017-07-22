@@ -5,6 +5,8 @@ import com.rodion.silvermilldata.entity.UserEntity;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
+import java.util.List;
+
 /**
  * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
  */
@@ -19,6 +21,11 @@ public class ConnectionTest {
         UserDao userDao = context.getBean(UserDao.class);
 
         userDao.save(user);
+
+        List<UserEntity> usersFromDB = userDao.findAll();
+        System.out.println(usersFromDB.get(0).getUsername() + " " + usersFromDB.get(0).getPassword());
+
+        System.out.println(usersFromDB.size());
 
         context.close();
 
