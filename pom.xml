@@ -38,6 +38,11 @@
         <dependencies>
             <dependency>
                 <groupId>com.rodion</groupId>
+                <artifactId>silvermill-data-client</artifactId>
+                <version>${silvermill.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rodion</groupId>
                 <artifactId>silvermill-data-dao</artifactId>
                 <version>${silvermill.version}</version>
             </dependency>
@@ -64,6 +69,11 @@
             <dependency>
                 <groupId>com.rodion</groupId>
                 <artifactId>silvermill-data-service</artifactId>
+                <version>${silvermill.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rodion</groupId>
+                <artifactId>silvermill-data-service-impl</artifactId>
                 <version>${silvermill.version}</version>
             </dependency>
 
