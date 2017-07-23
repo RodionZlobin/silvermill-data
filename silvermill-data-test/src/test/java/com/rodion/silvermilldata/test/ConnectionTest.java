@@ -3,8 +3,6 @@ package com.rodion.silvermilldata.test;
 import com.rodion.silvermilldata.dao.UserDao;
 import com.rodion.silvermilldata.entity.UserEntity;
 import org.junit.*;
-import org.junit.rules.RuleChain;
-import org.junit.rules.TestRule;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
@@ -16,9 +14,9 @@ import java.util.List;
  */
 public class ConnectionTest {
 
-    //for best test use create / delete DB
+    //for best test use create / delete DB or TODO: create DB manually and drop after test
 
-    /*
+
 
     public static ApplicationContext springContextRule = new ClassPathXmlApplicationContext(new ClassPathResource("silvermill-data-dao.xml").getPath());
 
@@ -29,27 +27,27 @@ public class ConnectionTest {
 
         UserDao userDao = springContextRule.getBean(UserDao.class);
 
-        UserEntity user = new UserEntity("username", "password");
+        UserEntity user = new UserEntity("1","username", "password");
 
 
-        userDao.save(user);
+        userDao.insert(user);
         List<UserEntity> usersFromDB = userDao.findAll();
 
         Assert.assertEquals(1, usersFromDB.size());
 
         //same password, different usernames
-        UserEntity user2 = new UserEntity("username1", "password");
-        userDao.save(user2);
+        UserEntity user2 = new UserEntity("2","username1", "password");
+        userDao.insert(user2);
         usersFromDB = userDao.findAll();
 
         Assert.assertEquals(2, usersFromDB.size());
 
         //same username, different passwords
-        UserEntity user3 = new UserEntity("username", "password1");
-        userDao.save(user3);
+        UserEntity user3 = new UserEntity("3","username", "password1");
+        userDao.insert(user3);
         usersFromDB = userDao.findAll();
 
         Assert.assertEquals(2, usersFromDB.size());
     }
-     */
+
 }
