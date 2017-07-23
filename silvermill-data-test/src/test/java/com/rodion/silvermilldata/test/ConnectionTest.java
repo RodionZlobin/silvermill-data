@@ -35,6 +35,15 @@ public class ConnectionTest {
 
         Assert.assertEquals(1, usersFromDB.size());
 
+        UserEntity userEntityByUserId = userDao.findByUserId("1");
+        UserEntity userEntityByUsername = userDao.findByUsername("username");
+
+        Assert.assertEquals("1", userEntityByUserId.getUserId());
+        Assert.assertEquals("username", userEntityByUsername.getUsername());
+
+
+
+
         //same password, different usernames
         UserEntity user2 = new UserEntity("2","username1", "password");
         userDao.insert(user2);
@@ -48,6 +57,7 @@ public class ConnectionTest {
         usersFromDB = userDao.findAll();
 
         Assert.assertEquals(2, usersFromDB.size());
+
     }
 
 }

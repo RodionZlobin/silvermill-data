@@ -19,6 +19,7 @@
         <module>silvermill-data-service-impl</module>
         <module>silvermill-data-test</module>
         <module>silvermill-data-domain-mapper</module>
+        <module>silvermill-data-client</module>
     </modules>
 
     <properties>
@@ -53,6 +54,16 @@
             <dependency>
                 <groupId>com.rodion</groupId>
                 <artifactId>silvermill-data-entity</artifactId>
+                <version>${silvermill.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rodion</groupId>
+                <artifactId>silvermill-data-domain-mapper</artifactId>
+                <version>${silvermill.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rodion</groupId>
+                <artifactId>silvermill-data-service</artifactId>
                 <version>${silvermill.version}</version>
             </dependency>
 
