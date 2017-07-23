@@ -9,12 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>silvermill-data-domain</artifactId>
+    <artifactId>silvermill-data-domain-mapper</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
+            <groupId>com.rodion</groupId>
+            <artifactId>silvermill-data-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.rodion</groupId>
+            <artifactId>silvermill-data-entity</artifactId>
         </dependency>
     </dependencies>
 
