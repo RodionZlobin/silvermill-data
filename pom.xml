@@ -18,12 +18,15 @@
         <module>silvermill-data-service</module>
         <module>silvermill-data-service-impl</module>
         <module>silvermill-data-test</module>
+        <module>silvermill-data-domain-mapper</module>
     </modules>
 
     <properties>
         <silvermill.version>0.0.1-SNAPSHOT</silvermill.version>
         <springframework.version>4.3.9.RELEASE</springframework.version>
         <spring.mongo.version>1.10.4.RELEASE</spring.mongo.version>
+        <google.guava.version>22.0</google.guava.version>
+        <fasterxml.jackson.version>2.8.9</fasterxml.jackson.version>
     </properties>
 
 
@@ -35,6 +38,11 @@
             <dependency>
                 <groupId>com.rodion</groupId>
                 <artifactId>silvermill-data-dao</artifactId>
+                <version>${silvermill.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rodion</groupId>
+                <artifactId>silvermill-data-domain</artifactId>
                 <version>${silvermill.version}</version>
             </dependency>
             <dependency>
@@ -60,6 +68,20 @@
                 <artifactId>spring-context</artifactId>
                 <version>${springframework.version}</version>
             </dependency>
+
+            <!-- Other dependencies -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google.guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

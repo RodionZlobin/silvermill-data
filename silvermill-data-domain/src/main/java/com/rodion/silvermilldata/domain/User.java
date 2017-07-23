@@ -1,9 +1,14 @@
 package com.rodion.silvermilldata.domain;
 
+import java.io.Serializable;
+
 /**
  * @author Rodion
  */
-public final class User {
+public class User extends ValueObject implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     private String userId;
     private String userName;
     private String password;
@@ -39,11 +44,7 @@ public final class User {
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    protected Object[] getIdFields() {
+        return new Object[]{userId, userName, password};
     }
 }
