@@ -31,14 +31,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User userRequest) {
         UserEntity userEntity = UserDomainMapper.map(userRequest);
-        User userResponce = UserDomainMapper.map(userDao.insert(userEntity));
-        return userResponce;
+        return UserDomainMapper.map(userDao.insert(userEntity));
     }
 
     @Override
     public List<User> findAllUsers() {
         List<UserEntity> userEntities = userDao.findAll();
-        List<User> users = UserDomainMapper.map(userEntities);
-        return users;
+        return UserDomainMapper.map(userEntities);
     }
 }

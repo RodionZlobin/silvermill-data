@@ -27,7 +27,7 @@ public class UserEntity extends IdEntity<String> implements Serializable{
 
     private String password;
 
-    public UserEntity(){
+    protected UserEntity(){
 
     }
 

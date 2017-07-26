@@ -12,13 +12,15 @@ import java.util.List;
 public class UserDomainMapper {
 
     public static User map(UserEntity userEntity){
-        User user = new User(userEntity.getUserId(), userEntity.getUsername(), userEntity.getPassword());
-        return user;
+        return new User(userEntity.getUserId(),
+                        userEntity.getUsername(),
+                        userEntity.getPassword());
     }
 
     public static UserEntity map(User user){
-        UserEntity userEntity = new UserEntity(user.getUserId(), user.getUserName(), user.getPassword());
-        return userEntity;
+        return new UserEntity(user.getUserId(),
+                                user.getUserName(),
+                                user.getPassword());
     }
 
     public static List<User> map(List<UserEntity> userEntities){
