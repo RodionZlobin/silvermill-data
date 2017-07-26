@@ -6,7 +6,7 @@ import com.rodion.silvermilldata.service.UserService;
 import java.util.List;
 
 /**
- * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
+ * @author Rodion
  */
 public class UserClientImpl implements UserClient {
 
