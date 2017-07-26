@@ -46,19 +46,22 @@ public abstract class AbstractDao<T, ID extends Serializable> implements Generic
         return entity;
     }
 
-    public <S extends T> List<S> save(Iterable<S> entities) {
-        mongoOperations.save(entities);
-        return (List<S>) entities;
+    public <S extends T> S upsert(S entity) {
+        mongoOperations.save(entity);
+        return entity;
     }
+
+    public List<T> findAll() {
+        return mongoOperations.findAll(persistentClass);
+    }
+
+    /*
 
     public <S extends T> List<S> insert(Iterable<S> entities) {
         mongoOperations.insertAll((Collection<S>) entities);
         return (List<S>) entities;
     }
 
-    public List<T> findAll() {
-        return mongoOperations.findAll(persistentClass);
-    }
 
     @SuppressWarnings("unchecked")
     public List<T> findAll(Sort sort) {
@@ -72,5 +75,6 @@ public abstract class AbstractDao<T, ID extends Serializable> implements Generic
     public <S extends T> List<S> findAll(Example<S> example, Sort sort) {
         return mongoOperations.findAll(example.getProbeType(), sort.toString());
     }
+     */
 
 }

@@ -13,10 +13,12 @@ public interface GenericDao<T, ID extends Serializable> {
 
     <S extends T> S insert(S entity);
 
-    <S extends T> List<S> save(Iterable<S> entites);
+    <S extends T> S upsert(S entity);
 
     List<T> findAll();
 
+    /*
+    <S extends T> List<S> save(Iterable<S> entites);
     List<T> findAll(Sort sort);
 
     <S extends T> List<S> findAll(Example<S> example);
@@ -24,5 +26,6 @@ public interface GenericDao<T, ID extends Serializable> {
     <S extends T> List<S> findAll(Example<S> example, Sort sort);
 
     <S extends T> List<S> insert(Iterable<S> entities);
+     */
 
 }
