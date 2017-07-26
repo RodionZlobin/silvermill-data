@@ -5,6 +5,8 @@ import com.rodion.silvermilldata.domain.User;
 import com.rodion.silvermilldata.entity.UserEntity;
 import com.rodion.silvermilldata.mapper.UserDomainMapper;
 
+import java.util.List;
+
 /**
  * @author Rodion
  */
@@ -31,5 +33,12 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = UserDomainMapper.map(userRequest);
         User userResponce = UserDomainMapper.map(userDao.insert(userEntity));
         return userResponce;
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        List<UserEntity> userEntities = userDao.findAll();
+        List<User> users = UserDomainMapper.map(userEntities);
+        return users;
     }
 }
