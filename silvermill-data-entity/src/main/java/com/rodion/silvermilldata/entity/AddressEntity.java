@@ -14,8 +14,22 @@ public class AddressEntity extends IdEntity<String> implements Serializable {
     @Id
     private String id;
 
+    private String AddressEntityId;
+
+    public AddressEntity(String AddressEntityId) {
+        this.AddressEntityId = AddressEntityId;
+    }
+
+    public String getAddressEntityId() {
+        return AddressEntityId;
+    }
+
+    public void setAddressEntityId(String addressEntityId) {
+        this.AddressEntityId = addressEntityId;
+    }
+
     @Override
     public String getId() {
-        return null;
+        return id;
     }
 }
