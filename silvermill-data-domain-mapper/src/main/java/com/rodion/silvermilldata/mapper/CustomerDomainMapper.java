@@ -18,6 +18,7 @@ public class CustomerDomainMapper {
                                 AddressDomainMapper.map(customerEntity.getAddressEntity()),
                                 DeliveryAddressDomainMapper.map(customerEntity.getDeliveryAddressEntity()));
     }
+    /*
 
     public static CustomerEntity map(Customer customer){
         return new CustomerEntity(customer.getCustomerId(),
@@ -26,6 +27,14 @@ public class CustomerDomainMapper {
                                     customer.getCustomerRegNumber(),
                                     AddressDomainMapper.map(customer.getAddress()),
                                     DeliveryAddressDomainMapper.map(customer.getDeliveryAddress()));
+    }
+     */
+
+    public static CustomerEntity map(Customer customer){
+        return new CustomerEntity(customer.getCustomerId(),
+                                    customer.getCustomerName(),
+                                    customer.getCustomerVAT(),
+                                    customer.getCustomerRegNumber());
     }
 
     public static List<Customer> map(List<CustomerEntity> entities){

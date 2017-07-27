@@ -6,4 +6,5 @@ import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
  * @author Rodion
  */
 public interface DeliveryAddressDao extends GenericDao<DeliveryAddressEntity, String>{
+    DeliveryAddressEntity findByDeliveryAddressId(String deliveryAddressId);
 }

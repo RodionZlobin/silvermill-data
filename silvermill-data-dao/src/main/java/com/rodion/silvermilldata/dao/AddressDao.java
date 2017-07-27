@@ -7,4 +7,5 @@ import com.rodion.silvermilldata.entity.ProductEntity;
  * @author Rodion
  */
 public interface AddressDao extends GenericDao<AddressEntity, String> {
+    AddressEntity findByAddressID(String addressId);
 }
