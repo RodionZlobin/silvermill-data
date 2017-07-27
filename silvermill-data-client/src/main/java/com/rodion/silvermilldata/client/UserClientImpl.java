@@ -29,9 +29,9 @@ public class UserClientImpl implements UserClient {
     }
 
     @Override
-    public User createUser(User userRequest) {
+    public User createOrUpdateUser(User userRequest) {
         
-        return userService.createUser(userRequest);
+        return userService.createOrUpdateUser(userRequest);
     }
 
     @Override

@@ -36,23 +36,23 @@ public class ConnectionTest {
 
         User user = new User("1", "username1", "password1");
 
-        userClient.createUser(user);
+        userClient.createOrUpdateUser(user);
         Assert.assertEquals("1", userClient.findUserByUserId("1").getUserId());
         Assert.assertEquals("username1", userClient.findUserByUsername("username1").getUserName());
 
 
         /*
         User user2 = new User("2", "username1", "password2");
-        userClient.createUser(user2);
+        userClient.createOrUpdateUser(user2);
         Assert.assertNull(userClient.findUserByUserId("2"));
         */
         User user3 = new User("3", "username3", "password1");
-        userClient.createUser(user3);
+        userClient.createOrUpdateUser(user3);
         Assert.assertNotNull(userClient.findUserByUserId("3"));
         Assert.assertEquals("password1", userClient.findUserByUsername("username3").getPassword());
 
         User user4 = new User("1", "username4", "password4");
-        userClient.createUser(user4);
+        userClient.createOrUpdateUser(user4);
         //Assert.assertNull(userClient.findUserByUsername("username4"));
 
         Assert.assertEquals("password1", userClient.findUserByUserId("1").getPassword());

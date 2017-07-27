@@ -55,6 +55,10 @@ public abstract class AbstractDao<T, ID extends Serializable> implements Generic
         return mongoOperations.findAll(persistentClass);
     }
 
+    public boolean exists(String queryParameter, Class<T> entityClass){
+        return false;
+    }
+
     /*
 
     public <S extends T> List<S> insert(Iterable<S> entities) {
