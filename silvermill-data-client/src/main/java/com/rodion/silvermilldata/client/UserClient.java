@@ -10,6 +10,6 @@ import java.util.List;
 public interface UserClient {
     User findUserByUserId(String userId);
     User findUserByUsername(String username);
-    User createUser(User userRequest);
+    User createOrUpdateUser(User userRequest);
     List<User> getAllUsers();
 }

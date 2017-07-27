@@ -2,6 +2,7 @@ package com.rodion.silvermilldata.dao;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,17 +16,8 @@ public interface GenericDao<T, ID extends Serializable> {
 
     <S extends T> S upsert(S entity);
 
+    boolean exists(String queryParameter, Class<T> entityClass);
+
     List<T> findAll();
-
-    /*
-    <S extends T> List<S> save(Iterable<S> entites);
-    List<T> findAll(Sort sort);
-
-    <S extends T> List<S> findAll(Example<S> example);
-
-    <S extends T> List<S> findAll(Example<S> example, Sort sort);
-
-    <S extends T> List<S> insert(Iterable<S> entities);
-     */
 
 }

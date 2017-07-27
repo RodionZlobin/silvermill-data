@@ -28,4 +28,11 @@ public class UserDaoImpl extends AbstractDao<UserEntity, String> implements User
         return mongoOperations.findOne(query, UserEntity.class);
     }
 
+
+    @Override
+    public boolean exists(String userId, Class<UserEntity> entityClass) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("userId").is(userId));
+        return mongoOperations.exists(query, entityClass);
+    }
 }

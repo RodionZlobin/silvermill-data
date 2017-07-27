@@ -11,6 +11,6 @@ import java.util.List;
 public interface UserService {
     User findUserByUserId(String id);
     User findUserByUsername(String username);
-    User createUser(User user);
+    User createOrUpdateUser(User user);
     List<User> findAllUsers();
 }
