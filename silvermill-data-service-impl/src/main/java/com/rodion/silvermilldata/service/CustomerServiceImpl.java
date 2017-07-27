@@ -1,9 +1,17 @@
 package com.rodion.silvermilldata.service;
 
+import com.rodion.silvermilldata.dao.AddressDao;
 import com.rodion.silvermilldata.dao.CustomerDao;
+import com.rodion.silvermilldata.dao.DeliveryAddressDao;
+import com.rodion.silvermilldata.domain.Address;
 import com.rodion.silvermilldata.domain.Customer;
+import com.rodion.silvermilldata.domain.DeliveryAddress;
+import com.rodion.silvermilldata.entity.AddressEntity;
 import com.rodion.silvermilldata.entity.CustomerEntity;
+import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
+import com.rodion.silvermilldata.mapper.AddressDomainMapper;
 import com.rodion.silvermilldata.mapper.CustomerDomainMapper;
+import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
 import com.rodion.silvermilldata.mapper.Updater;
 
 
@@ -15,23 +23,30 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     private CustomerDao customerDao;
+    private AddressDao addressDao;
+    private DeliveryAddressDao deliveryAddressDao;
 
-    public CustomerServiceImpl(CustomerDao customerDao) {
+    public CustomerServiceImpl(CustomerDao customerDao, AddressDao addressDao, DeliveryAddressDao deliveryAddressDao) {
         this.customerDao = customerDao;
+        this.addressDao = addressDao;
+        this.deliveryAddressDao = deliveryAddressDao;
     }
 
     @Override
     public Customer createOrUpdateCustomer(Customer customerRequest) {
 
         CustomerEntity customerEntity;
-        if(customerDao.exists(customerRequest.getCustomerId(), CustomerEntity.class))
+        if(customerDao.exists(customerRequest.getCustomerName(), CustomerEntity.class))
         {
-            CustomerEntity customerEntityFromDB = customerDao.findByCustomerName(customerRequest.getCustomerName());
-            customerEntity = Updater.updateCustomerEntity(customerEntityFromDB, customerRequest);
+            //CustomerEntity customerEntityFromDB = customerDao.findByCustomerName(customerRequest.getCustomerName());
+            //customerEntity = Updater.updateCustomerEntity(customerEntityFromDB, customerRequest);
+            customerEntity = customerDao.findByCustomerName(customerRequest.getCustomerName());
         }
         else{
             customerEntity = CustomerDomainMapper.map(customerRequest);
         }
+        customerEntity.setAddressEntity(upsertAddress(customerRequest.getAddress()));
+        customerEntity.setDeliveryAddressEntity(upsertDeliveryAddress(customerRequest.getDeliveryAddress()));
 
         return CustomerDomainMapper.map(customerDao.upsert(customerEntity));
     }
@@ -46,5 +61,15 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findAllCustomers() {
 
         return CustomerDomainMapper.map(customerDao.findAll());
+    }
+
+    private AddressEntity upsertAddress(Address address){
+        addressDao.upsert(AddressDomainMapper.map(address));
+        return addressDao.findByAddressID(address.getAddressId());
+    }
+
+    private DeliveryAddressEntity upsertDeliveryAddress(DeliveryAddress deliveryAddress){
+        deliveryAddressDao.upsert(DeliveryAddressDomainMapper.map(deliveryAddress));
+        return deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId());
     }
 }

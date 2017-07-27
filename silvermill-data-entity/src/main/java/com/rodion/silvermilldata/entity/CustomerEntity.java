@@ -3,12 +3,16 @@ package com.rodion.silvermilldata.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
 /**
  * @author Rodion
  */
+
+@Document(collection = "customers")
 public class CustomerEntity extends IdEntity<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,10 +32,21 @@ public class CustomerEntity extends IdEntity<String> implements Serializable {
     @Indexed(unique = true)
     private String customerRegNumber;
 
+    @DBRef
     private AddressEntity addressEntity;
+
+    @DBRef
     private DeliveryAddressEntity deliveryAddressEntity;
 
     protected CustomerEntity(){}
+
+    //needs for mapping
+    public CustomerEntity(String customerId, String customerName, String customerVAT, String customerRegNumber) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerVAT = customerVAT;
+        this.customerRegNumber = customerRegNumber;
+    }
 
     @PersistenceConstructor
     public CustomerEntity(String customerId, String customerName, String customerVAT, String customerRegNumber, AddressEntity addressEntity, DeliveryAddressEntity deliveryAddressEntity) {

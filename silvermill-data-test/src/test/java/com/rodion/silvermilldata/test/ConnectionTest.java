@@ -1,10 +1,25 @@
 package com.rodion.silvermilldata.test;
 
+import com.rodion.silvermilldata.client.CustomerClient;
+import com.rodion.silvermilldata.client.CustomerClientImpl;
 import com.rodion.silvermilldata.client.UserClient;
 import com.rodion.silvermilldata.client.UserClientImpl;
+import com.rodion.silvermilldata.dao.AddressDao;
+import com.rodion.silvermilldata.dao.CustomerDao;
+import com.rodion.silvermilldata.dao.DeliveryAddressDao;
 import com.rodion.silvermilldata.dao.UserDao;
+import com.rodion.silvermilldata.domain.Address;
+import com.rodion.silvermilldata.domain.Customer;
+import com.rodion.silvermilldata.domain.DeliveryAddress;
 import com.rodion.silvermilldata.domain.User;
+import com.rodion.silvermilldata.entity.AddressEntity;
+import com.rodion.silvermilldata.entity.CustomerEntity;
+import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
 import com.rodion.silvermilldata.entity.UserEntity;
+import com.rodion.silvermilldata.mapper.AddressDomainMapper;
+import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
+import com.rodion.silvermilldata.service.CustomerService;
+import com.rodion.silvermilldata.service.CustomerServiceImpl;
 import com.rodion.silvermilldata.service.UserService;
 import com.rodion.silvermilldata.service.UserServiceImpl;
 import org.junit.*;
@@ -24,6 +39,37 @@ public class ConnectionTest {
 
 
     public static ApplicationContext springContextRule = new ClassPathXmlApplicationContext(new ClassPathResource("silvermill-data-dao.xml").getPath());
+
+    @Ignore
+    @Test
+    public void tryCreateCustomer(){
+        CustomerDao customerDao = springContextRule.getBean(CustomerDao.class);
+        AddressDao addressDao = springContextRule.getBean(AddressDao.class);
+        DeliveryAddressDao deliveryAddressDao = springContextRule.getBean(DeliveryAddressDao.class);
+        CustomerService customerService = new CustomerServiceImpl(customerDao, addressDao, deliveryAddressDao);
+        CustomerClient customerClient = new CustomerClientImpl(customerService);
+
+
+        Address address = new Address("1", "address", "street", "build", "city", "zip", "country", "PO");
+        DeliveryAddress deliveryAddress = new DeliveryAddress("10", "delivery", "dstreet", "delbuild", "delcity", "delzip", "delcountry", "delPO");
+
+        Customer customer = new Customer("C1", "c-name", "vat", "reg", address, deliveryAddress);
+
+        customerClient.createOrUpdateCustomer(customer);
+        /*
+
+        addressDao.insert(AddressDomainMapper.map(address));
+        deliveryAddressDao.insert(DeliveryAddressDomainMapper.map(deliveryAddress));
+
+        AddressEntity addressEntity = addressDao.findByAddressID("1");
+        DeliveryAddressEntity deliveryAddressEntity = deliveryAddressDao.findByDeliveryAddressId("10");
+
+        CustomerEntity customer = new CustomerEntity("C1", "cname", "vat", "reg", addressEntity, deliveryAddressEntity);
+
+        //customerClient.createOrUpdateCustomer(customer);
+        customerDao.insert(customer);
+         */
+    }
 
 
     @Ignore //prepare clear DB
