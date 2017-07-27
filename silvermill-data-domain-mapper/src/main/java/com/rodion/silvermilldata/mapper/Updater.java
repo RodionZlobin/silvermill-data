@@ -23,8 +23,6 @@ public class Updater {
     }
 
     public static ProductEntity updateProductEntity(ProductEntity entity, Product product){
-        entity.setProductName(product.getProductName());
-        entity.setProductColor(product.getProductColor());
         entity.setProductSalesPrice(product.getProductSalesPrice());
         entity.setProductQuantity(product.getProductQuantity());
         return entity;
