@@ -14,6 +14,20 @@ public class DeliveryAddressEntity extends IdEntity<String> implements Serializa
     @Id
     private String id;
 
+    private String deliveryAddressEntityId;
+
+    public DeliveryAddressEntity(String deliveryAddressId) {
+        this.deliveryAddressEntityId = deliveryAddressEntityId;
+    }
+
+    public String getDeliveryAddressEntityId() {
+        return deliveryAddressEntityId;
+    }
+
+    public void setDeliveryAddressEntityId(String deliveryAddressEntityId) {
+        this.deliveryAddressEntityId = deliveryAddressEntityId;
+    }
+
     @Override
     public String getId() {
         return id;

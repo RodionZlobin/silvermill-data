@@ -1,4 +1,4 @@
-package com.rodion.silvermilldata.entity;
+package com.rodion.silvermilldata.domain;
 
 /**
  * @author Rodion
