@@ -3,12 +3,15 @@ package com.rodion.silvermilldata.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
 /**
  * @author Rodion
  */
+
+@Document(collection = "products")
 public class ProductEntity extends IdEntity<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
