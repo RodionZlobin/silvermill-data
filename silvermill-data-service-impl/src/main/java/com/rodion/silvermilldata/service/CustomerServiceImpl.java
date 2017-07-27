@@ -4,6 +4,8 @@ import com.rodion.silvermilldata.dao.CustomerDao;
 import com.rodion.silvermilldata.domain.Customer;
 import com.rodion.silvermilldata.entity.CustomerEntity;
 import com.rodion.silvermilldata.mapper.CustomerDomainMapper;
+import com.rodion.silvermilldata.mapper.Updater;
+
 
 import java.util.List;
 
@@ -19,16 +21,25 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer createCustomer(Customer customer) {
+    public Customer createOrUpdateCustomer(Customer customerRequest) {
 
-        CustomerEntity customerEntity = CustomerDomainMapper.map(customer);
-        return CustomerDomainMapper.map(customerDao.insert(customerEntity));
+        CustomerEntity customerEntity;
+        if(customerDao.exists(customerRequest.getCustomerId(), CustomerEntity.class))
+        {
+            CustomerEntity customerEntityFromDB = customerDao.findByCustomerName(customerRequest.getCustomerName());
+            customerEntity = Updater.updateCustomerEntity(customerEntityFromDB, customerRequest);
+        }
+        else{
+            customerEntity = CustomerDomainMapper.map(customerRequest);
+        }
+
+        return CustomerDomainMapper.map(customerDao.upsert(customerEntity));
     }
 
     @Override
-    public Customer findCustomerByCustomerName(String customerName) {
+    public Customer findByCustomerName(String customerName) {
 
-        return CustomerDomainMapper.map(customerDao.findCustomerByCustomerName(customerName));
+        return CustomerDomainMapper.map(customerDao.findByCustomerName(customerName));
     }
 
     @Override

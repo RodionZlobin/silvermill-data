@@ -6,6 +6,6 @@ import com.rodion.silvermilldata.entity.CustomerEntity;
  * @author Rodion
  */
 public interface CustomerDao extends GenericDao<CustomerEntity, String> {
-    CustomerEntity findCustomerByCustomerName(String customerName);
+    CustomerEntity findByCustomerName(String customerName);
 
 }

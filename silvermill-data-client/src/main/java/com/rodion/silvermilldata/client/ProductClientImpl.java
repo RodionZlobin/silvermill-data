@@ -17,18 +17,18 @@ public class ProductClientImpl implements ProductClient {
     }
 
     @Override
-    public Product createProduct(Product product) {
-        return productService.createProduct(product);
+    public Product createOrUpdateProduct(Product product) {
+        return productService.createOrUpdateProduct(product);
     }
 
     @Override
-    public Product findProductByProductArticle(String productArticle) {
-        return productService.findProductByProductArticle(productArticle);
+    public Product findByProductArticle(String productArticle) {
+        return productService.findByProductArticle(productArticle);
     }
 
     @Override
-    public List<Product> findProductsByProductName(String productName) {
-        return productService.findProductsByProductName(productName);
+    public List<Product> findByProductName(String productName) {
+        return productService.findByProductName(productName);
     }
 
     @Override

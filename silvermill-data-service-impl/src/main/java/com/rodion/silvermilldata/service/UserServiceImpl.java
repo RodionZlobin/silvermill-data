@@ -4,7 +4,7 @@ import com.rodion.silvermilldata.dao.UserDao;
 import com.rodion.silvermilldata.domain.User;
 import com.rodion.silvermilldata.entity.UserEntity;
 import com.rodion.silvermilldata.mapper.UserDomainMapper;
-import com.rodion.silvermilldata.mapper.UserUpdater;
+import com.rodion.silvermilldata.mapper.Updater;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         if(userDao.exists(userRequest.getUserId(), UserEntity.class))
         {
             UserEntity userEntityFromDB = userDao.findByUserId(userRequest.getUserId());
-            userEntity = UserUpdater.update(userEntityFromDB, userRequest);
+            userEntity = Updater.updateUserEntity(userEntityFromDB, userRequest);
         }
         else{
             userEntity = UserDomainMapper.map(userRequest);
