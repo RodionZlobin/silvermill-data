@@ -8,7 +8,7 @@ import java.util.List;
  * @author Rodion
  */
 public interface CustomerClient {
-    Customer createCustomer(Customer customer);
-    Customer findCustomerByCustomerName(String customerName);
+    Customer createOrUpdateCustomer(Customer customer);
+    Customer findByCustomerName(String customerName);
     List<Customer> findAllCustomers();
 }

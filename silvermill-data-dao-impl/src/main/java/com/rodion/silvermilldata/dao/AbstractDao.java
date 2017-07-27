@@ -22,8 +22,8 @@ public abstract class AbstractDao<T, ID extends Serializable> implements Generic
     protected MongoOperations mongoOperations;
 
     @SuppressWarnings("unchecked")
-    public AbstractDao(MongoOperations mongoOperations) throws ClassNotFoundException {
-        this.mongoOperations = (MongoOperations) Objects.requireNonNull(mongoOperations, "mongoOperations");
+    protected AbstractDao(MongoOperations mongoOperations) throws ClassNotFoundException {
+        this.mongoOperations = Objects.requireNonNull(mongoOperations, "mongoOperations");
 
         try {
             Type type = ((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -55,6 +55,7 @@ public abstract class AbstractDao<T, ID extends Serializable> implements Generic
         return mongoOperations.findAll(persistentClass);
     }
 
+    //Remove after override in all DAOs
     public boolean exists(String queryParameter, Class<T> entityClass){
         return false;
     }

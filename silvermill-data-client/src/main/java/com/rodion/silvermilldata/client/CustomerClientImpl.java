@@ -17,13 +17,13 @@ public class CustomerClientImpl implements CustomerClient  {
     }
 
     @Override
-    public Customer createCustomer(Customer customer) {
-        return customerService.createCustomer(customer);
+    public Customer createOrUpdateCustomer(Customer customer) {
+        return customerService.createOrUpdateCustomer(customer);
     }
 
     @Override
-    public Customer findCustomerByCustomerName(String customerName) {
-        return customerService.findCustomerByCustomerName(customerName);
+    public Customer findByCustomerName(String customerName) {
+        return customerService.findByCustomerName(customerName);
     }
 
     @Override

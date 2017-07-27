@@ -30,4 +30,11 @@ public class ProductDaoImpl extends AbstractDao<ProductEntity, String> implement
         query.addCriteria(Criteria.where("productName").is(productName));
         return mongoOperations.find(query, ProductEntity.class);
     }
+
+    @Override
+    public boolean exists(String productArticle, Class<ProductEntity> entityClass) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("productArticle").is(productArticle));
+        return mongoOperations.exists(query, entityClass);
+    }
 }

@@ -8,8 +8,8 @@ import java.util.List;
  * @author Rodion
  */
 public interface ProductClient {
-    Product createProduct(Product product);
-    Product findProductByProductArticle(String productArticle);
-    List<Product> findProductsByProductName(String productName);
+    Product createOrUpdateProduct(Product product);
+    Product findByProductArticle(String productArticle);
+    List<Product> findByProductName(String productName);
     List<Product> findAllProducts();
 }
