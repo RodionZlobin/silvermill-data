@@ -5,9 +5,29 @@
 
     <import resource="silvermill-data-mongo.xml"/>
 
-    <bean id="userDao" class="com.rodion.silvermilldata.dao.UserDaoImpl">
+    <bean id="abstractPropertyDao" abstract="true">
         <constructor-arg ref="mongoTemplate"/>
     </bean>
+
+
+    <bean id="addressDao" class="com.rodion.silvermilldata.dao.AddressDaoImpl" parent="abstractPropertyDao"/>
+
+    <bean id="customerDao" class="com.rodion.silvermilldata.dao.CustomerDaoImpl" parent="abstractPropertyDao"/>
+
+    <bean id="deliveryAddressDao" class="com.rodion.silvermilldata.dao.DeliveryAddressDaoImpl" parent="abstractPropertyDao"/>
+
+    <bean id="invoiceDao" class="com.rodion.silvermilldata.dao.InvoiceDaoImpl" parent="abstractPropertyDao"/>
+
+    <bean id="orderDao" class="com.rodion.silvermilldata.dao.OrderDaoImpl" parent="abstractPropertyDao"/>
+
+    <bean id="orderRawDao" class="com.rodion.silvermilldata.dao.OrderRawDaoImpl" parent="abstractPropertyDao"/>
+
+    <bean id="productDao" class="com.rodion.silvermilldata.dao.ProductDaoImpl" parent="abstractPropertyDao"/>
+
+    <bean id="userDao" class="com.rodion.silvermilldata.dao.UserDaoImpl" parent="abstractPropertyDao"/>
+
+
+
 
 
 </beans>
