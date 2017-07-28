@@ -1,11 +1,11 @@
 package com.rodion.silvermilldata.mapper;
 
 import com.rodion.silvermilldata.domain.Order;
-import com.rodion.silvermilldata.domain.OrderRaw;
+import com.rodion.silvermilldata.domain.OrderRow;
 import com.rodion.silvermilldata.entity.OrderEntity;
-import com.rodion.silvermilldata.entity.OrderRawEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Rodion
@@ -19,8 +19,8 @@ public class OrderDomainMapper {
                             CustomerDomainMapper.map(entity.getCustomerEntity()),
                             DeliveryAddressDomainMapper.map(entity.getDeliveryAddressEntity()),
                             entity.getDeliveryTerms(),
-                            //entity.getOrderRaws(),
-                            new ArrayList<OrderRaw>(),
+                            //entity.getOrderRows(),
+                            new ArrayList<OrderRow>(),
                             entity.getCurrency(),
                             entity.getVATRate(),
                             entity.getAmount(),
@@ -32,15 +32,18 @@ public class OrderDomainMapper {
         return new OrderEntity(order.getOrderNumber(),
                                 order.getOrderDate(),
                                 order.getPaymentTerms(),
-                                CustomerDomainMapper.map(order.getCustomer()),
-                                DeliveryAddressDomainMapper.map(order.getDeliveryAddress()),
                                 order.getDeliveryTerms(),
-                                new ArrayList<OrderRawEntity>(),
                                 order.getCurrency(),
                                 order.getVATRate(),
                                 order.getAmount(),
                                 order.getTotalAmount(),
                                 order.getStatus()
                                 );
+    }
+
+    public static List<Order> map(List<OrderEntity> entities){
+        List<Order> orders = new ArrayList<>();
+        entities.forEach(p -> orders.add(OrderDomainMapper.map(p)));
+        return orders;
     }
 }

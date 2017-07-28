@@ -15,6 +15,8 @@ public interface OrderDao extends GenericDao<OrderEntity, String> {
     List<OrderEntity> findByOrderDate(Date orderDate);
     List<OrderEntity> findBySpecifiedPeriod(Date dateStart, Date dateFinal);
     List<OrderEntity> findByCustomerAtPeriod(CustomerEntity customerEntity, Date dateStart, Date dateFinal);
+    List<OrderEntity> findByCustomer(String customerName);
+    List<OrderEntity> findByStatus(String orderStatus);
 
     //List<OrderEntity> findByOrderDateBetween(dateStart, dateFinal); - extends MongoRepository, Spring AutoGen queries...
 }

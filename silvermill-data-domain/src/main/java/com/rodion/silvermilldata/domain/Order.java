@@ -17,7 +17,7 @@ public class Order extends ValueObject implements Serializable {
     private Customer customer;
     private DeliveryAddress deliveryAddress;
     private String deliveryTerms;
-    private List<OrderRaw> orderRaws;
+    private List<OrderRow> orderRows;
     private String currency;
     private Integer VATRate;
     private Double amount;
@@ -30,7 +30,7 @@ public class Order extends ValueObject implements Serializable {
                  Customer customer,
                  DeliveryAddress deliveryAddress,
                  String deliveryTerms,
-                 List<OrderRaw> orderRaws,
+                 List<OrderRow> orderRows,
                  String currency,
                  Integer VATRate,
                  Double amount,
@@ -42,7 +42,7 @@ public class Order extends ValueObject implements Serializable {
         this.customer = customer;
         this.deliveryAddress = deliveryAddress;
         this.deliveryTerms = deliveryTerms;
-        this.orderRaws = orderRaws;
+        this.orderRows = orderRows;
         this.currency = currency;
         this.VATRate = VATRate;
         this.amount = amount;
@@ -98,12 +98,12 @@ public class Order extends ValueObject implements Serializable {
         this.deliveryTerms = deliveryTerms;
     }
 
-    public List<OrderRaw> getOrderRaws() {
-        return orderRaws;
+    public List<OrderRow> getOrderRows() {
+        return orderRows;
     }
 
-    public void setOrderRaws(List<OrderRaw> orderRaws) {
-        this.orderRaws = orderRaws;
+    public void setOrderRows(List<OrderRow> orderRows) {
+        this.orderRows = orderRows;
     }
 
     public String getCurrency() {
@@ -155,7 +155,7 @@ public class Order extends ValueObject implements Serializable {
                 customer,
                 deliveryAddress,
                 deliveryTerms,
-                orderRaws,
+                orderRows,
                 currency,
                 VATRate,
                 amount,

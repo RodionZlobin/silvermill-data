@@ -34,7 +34,7 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
     private String deliveryTerms;
 
     @DBRef
-    private List<OrderRawEntity> orderRaws;
+    private List<OrderRowEntity> orderRaws;
 
     private String currency;
     private Integer VATRate;
@@ -72,7 +72,7 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
                        CustomerEntity customerEntity,
                        DeliveryAddressEntity deliveryAddressEntity,
                        String deliveryTerms,
-                       List<OrderRawEntity> orderRaws,
+                       List<OrderRowEntity> orderRaws,
                        String currency,
                        Integer VATRate,
                        Double amount,
@@ -140,11 +140,11 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
         this.deliveryTerms = deliveryTerms;
     }
 
-    public List<OrderRawEntity> getOrderRaws() {
+    public List<OrderRowEntity> getOrderRaws() {
         return orderRaws;
     }
 
-    public void setOrderRaws(List<OrderRawEntity> orderRaws) {
+    public void setOrderRaws(List<OrderRowEntity> orderRaws) {
         this.orderRaws = orderRaws;
     }
 
@@ -198,7 +198,7 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
         return "OrderEntity{" +
                 "orderNumber='" + orderNumber + '\'' +
                 ", orderDate=" + orderDate +
-                ", customerEntity=" + customerEntity +
+                ", custome=" + customerEntity.getCustomerName() +
                 ", orderRaws=" + orderRaws +
                 ", amount=" + amount +
                 '}';

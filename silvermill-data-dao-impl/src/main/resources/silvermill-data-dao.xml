@@ -20,7 +20,7 @@
 
     <bean id="orderDao" class="com.rodion.silvermilldata.dao.OrderDaoImpl" parent="abstractPropertyDao"/>
 
-    <bean id="orderRawDao" class="com.rodion.silvermilldata.dao.OrderRawDaoImpl" parent="abstractPropertyDao"/>
+    <bean id="orderRowDao" class="com.rodion.silvermilldata.dao.OrderRowDaoImpl" parent="abstractPropertyDao"/>
 
     <bean id="productDao" class="com.rodion.silvermilldata.dao.ProductDaoImpl" parent="abstractPropertyDao"/>
 

@@ -22,7 +22,7 @@ public class Invoice extends ValueObject implements Serializable {
     private Integer VATRate;
     private Double amount;
     private Double totalAmount;
-    private List<OrderRaw> orderRaws;
+    private List<OrderRow> orderRows;
     private String status;
     private String totalAmountInWords;
     private String reducedVATNotification;
@@ -39,7 +39,7 @@ public class Invoice extends ValueObject implements Serializable {
                    Integer VATRate,
                    Double amount,
                    Double totalAmount,
-                   List<OrderRaw> orderRaws,
+                   List<OrderRow> orderRows,
                    String status,
                    String totalAmountInWords,
                    String reducedVATNotification,
@@ -55,7 +55,7 @@ public class Invoice extends ValueObject implements Serializable {
         this.VATRate = VATRate;
         this.amount = amount;
         this.totalAmount = totalAmount;
-        this.orderRaws = orderRaws;
+        this.orderRows = orderRows;
         this.status = status;
         this.totalAmountInWords = totalAmountInWords;
         this.reducedVATNotification = reducedVATNotification;
@@ -150,12 +150,12 @@ public class Invoice extends ValueObject implements Serializable {
         this.totalAmount = totalAmount;
     }
 
-    public List<OrderRaw> getOrderRaws() {
-        return orderRaws;
+    public List<OrderRow> getOrderRows() {
+        return orderRows;
     }
 
-    public void setOrderRaws(List<OrderRaw> orderRaws) {
-        this.orderRaws = orderRaws;
+    public void setOrderRows(List<OrderRow> orderRows) {
+        this.orderRows = orderRows;
     }
 
     public String getStatus() {
@@ -204,7 +204,7 @@ public class Invoice extends ValueObject implements Serializable {
                 VATRate,
                 amount,
                 totalAmount,
-                orderRaws,
+                orderRows,
                 status,
                 totalAmountInWords,
                 reducedVATNotification,
