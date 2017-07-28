@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     public Product createOrUpdateProduct(Product productRequest) {
 
         ProductEntity productEntity;
-        if(productDao.exists(productRequest.getProductArticle(), ProductEntity.class))
+        if(productDao.isExists(productRequest.getProductArticle(), ProductEntity.class))
         {
             ProductEntity productEntityFromDB = productDao.findByProductArticle(productRequest.getProductArticle());
             productEntity = Updater.updateProductEntity(productEntityFromDB, productRequest);

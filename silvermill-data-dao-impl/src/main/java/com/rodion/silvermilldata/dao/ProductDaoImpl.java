@@ -32,7 +32,7 @@ public class ProductDaoImpl extends AbstractDao<ProductEntity, String> implement
     }
 
     @Override
-    public boolean exists(String productArticle, Class<ProductEntity> entityClass) {
+    public boolean isExists(String productArticle, Class<ProductEntity> entityClass) {
         Query query = new Query();
         query.addCriteria(Criteria.where("productArticle").is(productArticle));
         return mongoOperations.exists(query, entityClass);

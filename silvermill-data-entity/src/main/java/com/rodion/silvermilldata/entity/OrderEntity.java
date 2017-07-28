@@ -1,7 +1,9 @@
 package com.rodion.silvermilldata.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,10 +24,18 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
 
     private Date orderDate;
     private String paymentTerms;
+
+    @DBRef
     private CustomerEntity customerEntity;
+
+    @DBRef
     private DeliveryAddressEntity deliveryAddressEntity;
+
     private String deliveryTerms;
+
+    @DBRef
     private List<OrderRawEntity> orderRaws;
+
     private String currency;
     private Integer VATRate;
     private Double amount;
@@ -34,6 +44,28 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
 
     protected OrderEntity(){}
 
+    //needs for mapping
+    public OrderEntity(String orderNumber,
+                       Date orderDate,
+                       String paymentTerms,
+                       String deliveryTerms,
+                       String currency,
+                       Integer VATRate,
+                       Double amount,
+                       Double totalAmount,
+                       String status) {
+        this.orderNumber = orderNumber;
+        this.orderDate = orderDate;
+        this.paymentTerms = paymentTerms;
+        this.deliveryTerms = deliveryTerms;
+        this.currency = currency;
+        this.VATRate = VATRate;
+        this.amount = amount;
+        this.totalAmount = totalAmount;
+        this.status = status;
+    }
+
+    @PersistenceConstructor
     public OrderEntity(String orderNumber,
                        Date orderDate,
                        String paymentTerms,

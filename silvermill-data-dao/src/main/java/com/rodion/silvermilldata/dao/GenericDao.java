@@ -16,7 +16,7 @@ public interface GenericDao<T, ID extends Serializable> {
 
     <S extends T> S upsert(S entity);
 
-    boolean exists(String queryParameter, Class<T> entityClass);
+    boolean isExists(String queryParameter, Class<T> entityClass);
 
     List<T> findAll();
 

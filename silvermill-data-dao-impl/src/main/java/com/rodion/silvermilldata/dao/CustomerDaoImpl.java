@@ -22,7 +22,7 @@ public class CustomerDaoImpl extends AbstractDao<CustomerEntity, String> impleme
     }
 
     @Override
-    public boolean exists(String customerName, Class<CustomerEntity> entityClass) {
+    public boolean isExists(String customerName, Class<CustomerEntity> entityClass) {
         Query query = new Query();
         query.addCriteria(Criteria.where("customerName").is(customerName));
         return mongoOperations.exists(query, entityClass);

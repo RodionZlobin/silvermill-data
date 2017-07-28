@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     public User createOrUpdateUser(User userRequest) {
 
         UserEntity userEntity;
-        if(userDao.exists(userRequest.getUserName(), UserEntity.class))
+        if(userDao.isExists(userRequest.getUserName(), UserEntity.class))
         {
             UserEntity userEntityFromDB = userDao.findByUsername(userRequest.getUserName());
             userEntity = Updater.updateUserEntity(userEntityFromDB, userRequest);

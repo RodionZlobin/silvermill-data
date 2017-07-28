@@ -4,18 +4,12 @@ import com.rodion.silvermilldata.client.CustomerClient;
 import com.rodion.silvermilldata.client.CustomerClientImpl;
 import com.rodion.silvermilldata.client.UserClient;
 import com.rodion.silvermilldata.client.UserClientImpl;
-import com.rodion.silvermilldata.dao.AddressDao;
-import com.rodion.silvermilldata.dao.CustomerDao;
-import com.rodion.silvermilldata.dao.DeliveryAddressDao;
-import com.rodion.silvermilldata.dao.UserDao;
+import com.rodion.silvermilldata.dao.*;
 import com.rodion.silvermilldata.domain.Address;
 import com.rodion.silvermilldata.domain.Customer;
 import com.rodion.silvermilldata.domain.DeliveryAddress;
 import com.rodion.silvermilldata.domain.User;
-import com.rodion.silvermilldata.entity.AddressEntity;
-import com.rodion.silvermilldata.entity.CustomerEntity;
-import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
-import com.rodion.silvermilldata.entity.UserEntity;
+import com.rodion.silvermilldata.entity.*;
 import com.rodion.silvermilldata.mapper.AddressDomainMapper;
 import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
 import com.rodion.silvermilldata.service.CustomerService;
@@ -56,6 +50,7 @@ public class ConnectionTest {
         Customer customer = new Customer("C1", "c-name", "vat", "reg", address, deliveryAddress);
 
         customerClient.createOrUpdateCustomer(customer);
+
         /*
 
         addressDao.insert(AddressDomainMapper.map(address));
