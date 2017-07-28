@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +13,8 @@ import java.util.List;
 /**
  * @author Rodion
  */
+
+@Document(collection = "orders")
 public class OrderEntity extends IdEntity<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,7 +37,7 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
     private String deliveryTerms;
 
     @DBRef
-    private List<OrderRowEntity> orderRaws;
+    private List<OrderRowEntity> orderRows;
 
     private String currency;
     private Integer VATRate;
@@ -72,7 +75,7 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
                        CustomerEntity customerEntity,
                        DeliveryAddressEntity deliveryAddressEntity,
                        String deliveryTerms,
-                       List<OrderRowEntity> orderRaws,
+                       List<OrderRowEntity> orderRows,
                        String currency,
                        Integer VATRate,
                        Double amount,
@@ -84,7 +87,7 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
         this.customerEntity = customerEntity;
         this.deliveryAddressEntity = deliveryAddressEntity;
         this.deliveryTerms = deliveryTerms;
-        this.orderRaws = orderRaws;
+        this.orderRows = orderRows;
         this.currency = currency;
         this.VATRate = VATRate;
         this.amount = amount;
@@ -140,12 +143,12 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
         this.deliveryTerms = deliveryTerms;
     }
 
-    public List<OrderRowEntity> getOrderRaws() {
-        return orderRaws;
+    public List<OrderRowEntity> getOrderRows() {
+        return orderRows;
     }
 
-    public void setOrderRaws(List<OrderRowEntity> orderRaws) {
-        this.orderRaws = orderRaws;
+    public void setOrderRows(List<OrderRowEntity> orderRows) {
+        this.orderRows = orderRows;
     }
 
     public String getCurrency() {
@@ -199,7 +202,7 @@ public class OrderEntity extends IdEntity<String> implements Serializable {
                 "orderNumber='" + orderNumber + '\'' +
                 ", orderDate=" + orderDate +
                 ", custome=" + customerEntity.getCustomerName() +
-                ", orderRaws=" + orderRaws +
+                ", orderRaws=" + orderRows +
                 ", amount=" + amount +
                 '}';
     }
