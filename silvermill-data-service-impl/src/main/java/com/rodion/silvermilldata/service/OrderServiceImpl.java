@@ -1,16 +1,17 @@
 package com.rodion.silvermilldata.service;
 
-import com.rodion.silvermilldata.dao.AddressDao;
-import com.rodion.silvermilldata.dao.DeliveryAddressDao;
-import com.rodion.silvermilldata.dao.OrderDao;
-import com.rodion.silvermilldata.dao.OrderRowDao;
+import com.rodion.silvermilldata.dao.*;
 import com.rodion.silvermilldata.domain.Customer;
 import com.rodion.silvermilldata.domain.DeliveryAddress;
 import com.rodion.silvermilldata.domain.Order;
 import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
 import com.rodion.silvermilldata.entity.OrderEntity;
 import com.rodion.silvermilldata.entity.OrderRowEntity;
-import com.rodion.silvermilldata.mapper.*;
+import com.rodion.silvermilldata.entity.ProductEntity;
+import com.rodion.silvermilldata.mapper.CustomerDomainMapper;
+import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
+import com.rodion.silvermilldata.mapper.OrderDomainMapper;
+import com.rodion.silvermilldata.mapper.OrderRowDomainMapper;
 
 import java.util.Date;
 import java.util.List;
@@ -21,15 +22,17 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private OrderDao orderDao;
-    private AddressDao addressDao;
     private DeliveryAddressDao deliveryAddressDao;
     private OrderRowDao orderRowDao;
+    private CustomerDao customerDao;
+    private ProductDao productDao;
 
-    public OrderServiceImpl(OrderDao orderDao, AddressDao addressDao, DeliveryAddressDao deliveryAddressDao, OrderRowDao orderRowDao) {
+    public OrderServiceImpl(OrderDao orderDao, CustomerDao customerDao, DeliveryAddressDao deliveryAddressDao, OrderRowDao orderRowDao, ProductDao productDao) {
         this.orderDao = orderDao;
-        this.addressDao = addressDao;
+        this.customerDao = customerDao;
         this.deliveryAddressDao = deliveryAddressDao;
         this.orderRowDao = orderRowDao;
+        this.productDao = productDao;
     }
 
     @Override
@@ -49,8 +52,8 @@ public class OrderServiceImpl implements OrderService {
         }
 
         setMetadata(orderEntity, orderRequest);
-
-        return null;
+        orderDao.insert(orderEntity);
+        return orderRequest;
     }
 
     @Override
@@ -76,13 +79,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void createOrderRows(Order orderRequest){
-        orderRowDao.insertAll(OrderRowDomainMapper.mapOrderRaws(orderRequest.getOrderRows()), OrderRowEntity.class);
+
+        orderRequest.getOrderRows().forEach(p -> {
+            ProductEntity productEntity = productDao.findByProductArticle(p.getProduct().getProductArticle());
+            OrderRowEntity orderRowEntity = OrderRowDomainMapper.map(p);
+            orderRowEntity.setProduct(productEntity);
+            orderRowDao.insert(orderRowEntity);
+        });
     }
 
-
     private OrderEntity setMetadata(OrderEntity entity, Order order){
-        entity.setDeliveryAddressEntity(upsertDeliveryAddress(order.getDeliveryAddress()));
-        entity.setOrderRaws(orderRowDao.findByOrderNumber(order.getOrderNumber()));
+        entity.setDeliveryAddressEntity(deliveryAddressDao.findByDeliveryAddressId(order.getDeliveryAddress().getDeliveryAddressId()));
+        entity.setCustomerEntity(customerDao.findByCustomerName(order.getCustomer().getCustomerName()));
+        createOrderRows(order);
+        entity.setOrderRows(orderRowDao.findByOrderNumber(order.getOrderNumber()));
         return entity;
     }
 }

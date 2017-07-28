@@ -12,11 +12,25 @@ import java.util.List;
 public class OrderRowDomainMapper {
 
     public static OrderRow map(OrderRowEntity entity){
-        return new OrderRow();
+
+        return new OrderRow(entity.getOrderRowId(),
+                entity.getOrderNumber(),
+                ProductDomainMapper.map(entity.getProduct()),
+                entity.getUnit(),
+                entity.getQuantity(),
+                entity.getPrice(),
+                entity.getAmount());
     }
 
-    public static OrderRowEntity map(OrderRow order){
-        return new OrderRowEntity();
+    public static OrderRowEntity map(OrderRow orderRow){
+
+        return new OrderRowEntity(orderRow.getOrderRowId(),
+                                    orderRow.getOrderNumber(),
+                                    ProductDomainMapper.map(orderRow.getProduct()),
+                                    orderRow.getUnit(),
+                                    orderRow.getQuantity(),
+                                    orderRow.getPrice(),
+                                    orderRow.getAmount());
     }
 
     public static List<OrderRowEntity> mapOrderRaws(List<OrderRow> orderRows){

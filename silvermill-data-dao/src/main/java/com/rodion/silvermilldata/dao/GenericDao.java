@@ -21,6 +21,4 @@ public interface GenericDao<T, ID extends Serializable> {
 
     List<T> findAll();
 
-    void insertAll(Collection<? extends T> batchToSave, Class<T> entityClass);
-
 }

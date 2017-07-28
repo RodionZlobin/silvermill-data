@@ -2,6 +2,7 @@ package com.rodion.silvermilldata.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +11,8 @@ import java.util.List;
 /**
  * @author Rodion
  */
+
+@Document(collection = "invoices")
 public class InvoiceEntity extends IdEntity<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
