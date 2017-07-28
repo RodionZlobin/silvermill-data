@@ -30,7 +30,7 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
     private Integer VATRate;
     private Double amount;
     private Double totalAmount;
-    private List<OrderRawEntity> orderRaws;
+    private List<OrderRowEntity> orderRaws;
     private String status;
     private String totalAmountInWords;
     private String reducedVATNotification;
@@ -47,7 +47,7 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
                          Integer VATRate,
                          Double amount,
                          Double totalAmount,
-                         List<OrderRawEntity> orderRaws,
+                         List<OrderRowEntity> orderRaws,
                          String status,
                          String totalAmountInWords,
                          String reducedVATNotification,
@@ -158,11 +158,11 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
         this.totalAmount = totalAmount;
     }
 
-    public List<OrderRawEntity> getOrderRaws() {
+    public List<OrderRowEntity> getOrderRaws() {
         return orderRaws;
     }
 
-    public void setOrderRaws(List<OrderRawEntity> orderRaws) {
+    public void setOrderRaws(List<OrderRowEntity> orderRaws) {
         this.orderRaws = orderRaws;
     }
 

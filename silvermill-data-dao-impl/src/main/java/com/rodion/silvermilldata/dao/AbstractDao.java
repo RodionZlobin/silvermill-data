@@ -60,6 +60,11 @@ public abstract class AbstractDao<T, ID extends Serializable> implements Generic
         return false;
     }
 
+    public void insertAll(Collection<? extends T> batchToSave, Class<T> entityClass){
+        mongoOperations.insert(batchToSave, entityClass);
+
+    }
+
     /*
 
     public <S extends T> List<S> insert(Iterable<S> entities) {

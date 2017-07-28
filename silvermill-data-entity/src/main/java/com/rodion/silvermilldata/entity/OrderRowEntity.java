@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * @author Rodion
  */
-public class OrderRawEntity extends IdEntity<String> implements Serializable {
+public class OrderRowEntity extends IdEntity<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -2,13 +2,12 @@ package com.rodion.silvermilldata.mapper;
 
 import com.rodion.silvermilldata.domain.Invoice;
 import com.rodion.silvermilldata.domain.Order;
-import com.rodion.silvermilldata.domain.OrderRaw;
+import com.rodion.silvermilldata.domain.OrderRow;
 import com.rodion.silvermilldata.entity.InvoiceEntity;
 import com.rodion.silvermilldata.entity.OrderEntity;
-import com.rodion.silvermilldata.entity.OrderRawEntity;
+import com.rodion.silvermilldata.entity.OrderRowEntity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Rodion
@@ -26,8 +25,8 @@ public class InvoiceDomainMapper {
                             invoiceEnity.getVATRate(),
                             invoiceEnity.getAmount(),
                             invoiceEnity.getTotalAmount(),
-                            //invoiceEnity.getOrderRaws(),
-                            new ArrayList<OrderRaw>(),
+                            //invoiceEnity.getOrderRows(),
+                            new ArrayList<OrderRow>(),
                             invoiceEnity.getStatus(),
                             invoiceEnity.getTotalAmountInWords(),
                             invoiceEnity.getReducedVATNotification(),
@@ -47,7 +46,7 @@ public class InvoiceDomainMapper {
                                     invoice.getVATRate(),
                                     invoice.getAmount(),
                                     invoice.getTotalAmount(),
-                                    new ArrayList<OrderRawEntity>(),
+                                    new ArrayList<OrderRowEntity>(),
                                     invoice.getStatus(),
                                     invoice.getTotalAmountInWords(),
                                     invoice.getReducedVATNotification(),

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,5 +20,7 @@ public interface GenericDao<T, ID extends Serializable> {
     boolean isExists(String queryParameter, Class<T> entityClass);
 
     List<T> findAll();
+
+    void insertAll(Collection<? extends T> batchToSave, Class<T> entityClass);
 
 }

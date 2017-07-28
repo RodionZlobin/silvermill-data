@@ -46,6 +46,18 @@ public class OrderDaoImpl extends AbstractDao<OrderEntity, String> implements Or
     }
 
     @Override
+    public List<OrderEntity> findByCustomer(String customerName) {
+        return null;
+    }
+
+    @Override
+    public List<OrderEntity> findByStatus(String orderStatus) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("orderStatus").is(orderStatus));
+        return mongoOperations.find(query, OrderEntity.class);
+    }
+
+    @Override
     public boolean isExists(String orderNumber, Class<OrderEntity> entityClass){
         Query query = new Query();
         query.addCriteria(Criteria.where("userNumber").is(orderNumber));
