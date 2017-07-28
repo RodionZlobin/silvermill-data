@@ -12,7 +12,6 @@ import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
 import com.rodion.silvermilldata.mapper.AddressDomainMapper;
 import com.rodion.silvermilldata.mapper.CustomerDomainMapper;
 import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
-import com.rodion.silvermilldata.mapper.Updater;
 
 
 import java.util.List;
@@ -36,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer createOrUpdateCustomer(Customer customerRequest) {
 
         CustomerEntity customerEntity;
-        if(customerDao.exists(customerRequest.getCustomerName(), CustomerEntity.class))
+        if(customerDao.isExists(customerRequest.getCustomerName(), CustomerEntity.class))
         {
             //CustomerEntity customerEntityFromDB = customerDao.findByCustomerName(customerRequest.getCustomerName());
             //customerEntity = Updater.updateCustomerEntity(customerEntityFromDB, customerRequest);
@@ -45,8 +44,10 @@ public class CustomerServiceImpl implements CustomerService {
         else{
             customerEntity = CustomerDomainMapper.map(customerRequest);
         }
-        customerEntity.setAddressEntity(upsertAddress(customerRequest.getAddress()));
-        customerEntity.setDeliveryAddressEntity(upsertDeliveryAddress(customerRequest.getDeliveryAddress()));
+        //customerEntity.setAddressEntity(upsertAddress(customerRequest.getAddress()));
+        //customerEntity.setDeliveryAddressEntity(upsertDeliveryAddress(customerRequest.getDeliveryAddress()));
+
+        setAddresses(customerEntity, customerRequest);
 
         return CustomerDomainMapper.map(customerDao.upsert(customerEntity));
     }
@@ -63,13 +64,22 @@ public class CustomerServiceImpl implements CustomerService {
         return CustomerDomainMapper.map(customerDao.findAll());
     }
 
-    private AddressEntity upsertAddress(Address address){
+    @Override
+    public AddressEntity upsertAddress(Address address){
         addressDao.upsert(AddressDomainMapper.map(address));
         return addressDao.findByAddressID(address.getAddressId());
     }
 
-    private DeliveryAddressEntity upsertDeliveryAddress(DeliveryAddress deliveryAddress){
+    @Override
+    public DeliveryAddressEntity upsertDeliveryAddress(DeliveryAddress deliveryAddress){
         deliveryAddressDao.upsert(DeliveryAddressDomainMapper.map(deliveryAddress));
         return deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId());
+    }
+
+    private CustomerEntity setAddresses(CustomerEntity entity, Customer customer){
+        entity.setAddressEntity(upsertAddress(customer.getAddress()));
+        entity.setDeliveryAddressEntity(upsertDeliveryAddress(customer.getDeliveryAddress()));
+
+        return entity;
     }
 }

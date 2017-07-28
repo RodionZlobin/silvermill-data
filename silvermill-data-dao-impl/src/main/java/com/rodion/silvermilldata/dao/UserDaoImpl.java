@@ -30,7 +30,7 @@ public class UserDaoImpl extends AbstractDao<UserEntity, String> implements User
 
 
     @Override
-    public boolean exists(String username, Class<UserEntity> entityClass) {
+    public boolean isExists(String username, Class<UserEntity> entityClass) {
         Query query = new Query();
         query.addCriteria(Criteria.where("username").is(username));
         return mongoOperations.exists(query, entityClass);

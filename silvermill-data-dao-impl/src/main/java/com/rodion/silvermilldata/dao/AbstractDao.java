@@ -56,7 +56,7 @@ public abstract class AbstractDao<T, ID extends Serializable> implements Generic
     }
 
     //Remove after override in all DAOs
-    public boolean exists(String queryParameter, Class<T> entityClass){
+    public boolean isExists(String queryParameter, Class<T> entityClass){
         return false;
     }
 
