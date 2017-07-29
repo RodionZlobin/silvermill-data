@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.query.Query;
 /**
  * @author Rodion
  */
-public class DeliveryAddressDaoImpl extends AbstractDao<DeliveryAddressEntity, String> implements DeliveryAddressDao {
+public class DeliveryAddressDaoImpl { //extends AbstractDao<DeliveryAddressEntity, String> implements DeliveryAddressDao {
+
+    /*
+
     public DeliveryAddressDaoImpl(MongoOperations mongoOperations) throws ClassNotFoundException {
         super(mongoOperations);
     }
@@ -19,4 +22,5 @@ public class DeliveryAddressDaoImpl extends AbstractDao<DeliveryAddressEntity, S
         query.addCriteria(Criteria.where("deliveryAddressId").is(deliveryAddressId));
         return mongoOperations.findOne(query, DeliveryAddressEntity.class);
     }
+     */
 }

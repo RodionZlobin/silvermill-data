@@ -22,6 +22,15 @@
             <groupId>com.rodion</groupId>
             <artifactId>silvermill-data-service</artifactId>
         </dependency>
+
+        <dependency>
+        <groupId>com.rodion</groupId>
+        <artifactId>silvermill-data-service-impl</artifactId>
+    </dependency>
+        <dependency>
+            <groupId>com.rodion</groupId>
+            <artifactId>silvermill-data-dao-impl</artifactId>
+        </dependency>
     </dependencies>
 
 

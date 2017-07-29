@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     public Product createOrUpdateProduct(Product productRequest) {
 
         ProductEntity productEntity;
-        if(productDao.isExists(productRequest.getProductArticle(), ProductEntity.class))
+        if(productDao.exists(productRequest.getProductArticle()))
         {
             ProductEntity productEntityFromDB = productDao.findByProductArticle(productRequest.getProductArticle());
             productEntity = Updater.updateProductEntity(productEntityFromDB, productRequest);
@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
             productEntity = ProductDomainMapper.map(productRequest);
         }
 
-        return ProductDomainMapper.map(productDao.upsert(productEntity));
+        return ProductDomainMapper.map(productDao.save(productEntity));
     }
 
     @Override

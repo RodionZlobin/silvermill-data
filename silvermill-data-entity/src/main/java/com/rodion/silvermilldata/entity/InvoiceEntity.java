@@ -1,7 +1,9 @@
 package com.rodion.silvermilldata.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -25,7 +27,11 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
 
     private Date invoiceDate;
     private Date dueDate;
+
+    @DBRef
     private CustomerEntity customerEntity;
+
+    @DBRef
     private DeliveryAddressEntity deliveryAddressEntity;
     private String deliveryTerms;
     private String countryOfOrigin;
@@ -33,12 +39,31 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
     private Integer VATRate;
     private Double amount;
     private Double totalAmount;
-    private List<OrderRowEntity> orderRaws;
+
+    @DBRef
+    private List<OrderRowEntity> orderRows;
     private String status;
     private String totalAmountInWords;
     private String reducedVATNotification;
-    private List<OrderEntity> orders;
+    //private List<OrderEntity> orders;
 
+    //needs for mapping
+    public InvoiceEntity(String invoiceNumber, Date invoiceDate, Date dueDate, String deliveryTerms, String countryOfOrigin, String currency, Integer VATRate, Double amount, Double totalAmount, String status, String totalAmountInWords, String reducedVATNotification) {
+        this.invoiceNumber = invoiceNumber;
+        this.invoiceDate = invoiceDate;
+        this.dueDate = dueDate;
+        this.deliveryTerms = deliveryTerms;
+        this.countryOfOrigin = countryOfOrigin;
+        this.currency = currency;
+        this.VATRate = VATRate;
+        this.amount = amount;
+        this.totalAmount = totalAmount;
+        this.status = status;
+        this.totalAmountInWords = totalAmountInWords;
+        this.reducedVATNotification = reducedVATNotification;
+    }
+
+    @PersistenceConstructor
     public InvoiceEntity(String invoiceNumber,
                          Date invoiceDate,
                          Date dueDate,
@@ -50,11 +75,10 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
                          Integer VATRate,
                          Double amount,
                          Double totalAmount,
-                         List<OrderRowEntity> orderRaws,
+                         List<OrderRowEntity> orderRows,
                          String status,
                          String totalAmountInWords,
-                         String reducedVATNotification,
-                         List<OrderEntity> orders) {
+                         String reducedVATNotification) {
         this.invoiceNumber = invoiceNumber;
         this.invoiceDate = invoiceDate;
         this.dueDate = dueDate;
@@ -66,11 +90,10 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
         this.VATRate = VATRate;
         this.amount = amount;
         this.totalAmount = totalAmount;
-        this.orderRaws = orderRaws;
+        this.orderRows = orderRows;
         this.status = status;
         this.totalAmountInWords = totalAmountInWords;
         this.reducedVATNotification = reducedVATNotification;
-        this.orders = orders;
     }
 
     public String getInvoiceNumber() {
@@ -161,12 +184,12 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
         this.totalAmount = totalAmount;
     }
 
-    public List<OrderRowEntity> getOrderRaws() {
-        return orderRaws;
+    public List<OrderRowEntity> getOrderRows() {
+        return orderRows;
     }
 
-    public void setOrderRaws(List<OrderRowEntity> orderRaws) {
-        this.orderRaws = orderRaws;
+    public void setOrderRows(List<OrderRowEntity> orderRows) {
+        this.orderRows = orderRows;
     }
 
     public String getStatus() {
@@ -191,14 +214,6 @@ public class InvoiceEntity extends IdEntity<String> implements Serializable {
 
     public void setReducedVATNotification(String reducedVATNotification) {
         this.reducedVATNotification = reducedVATNotification;
-    }
-
-    public List<OrderEntity> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<OrderEntity> orders) {
-        this.orders = orders;
     }
 
     @Override

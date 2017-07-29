@@ -11,8 +11,9 @@ import java.util.List;
 /**
  * @author Rodion
  */
-public class ProductDaoImpl extends AbstractDao<ProductEntity, String> implements ProductDao {
+public class ProductDaoImpl { //extends AbstractDao<ProductEntity, String> implements ProductDao {
 
+    /*
     public ProductDaoImpl(MongoOperations mongoOperations) throws ClassNotFoundException {
         super(mongoOperations);
     }
@@ -37,4 +38,5 @@ public class ProductDaoImpl extends AbstractDao<ProductEntity, String> implement
         query.addCriteria(Criteria.where("productArticle").is(productArticle));
         return mongoOperations.exists(query, entityClass);
     }
+     */
 }

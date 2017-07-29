@@ -7,4 +7,16 @@
         <constructor-arg ref="userService"/>
     </bean>
 
+    <bean id="customerClient" class="com.rodion.silvermilldata.client.CustomerClientImpl">
+        <constructor-arg ref="customerService"/>
+    </bean>
+
+    <bean id="orderClient" class="com.rodion.silvermilldata.client.OrderClientImpl">
+        <constructor-arg ref="orderService"/>
+    </bean>
+
+    <bean id="productClient" class="com.rodion.silvermilldata.client.ProductClientImpl">
+        <constructor-arg ref="productService"/>
+    </bean>
+
 </beans>

@@ -26,7 +26,6 @@ public class Invoice extends ValueObject implements Serializable {
     private String status;
     private String totalAmountInWords;
     private String reducedVATNotification;
-    private List<Order> orders;
 
     public Invoice(String invoiceNumber,
                    Date invoiceDate,
@@ -42,8 +41,7 @@ public class Invoice extends ValueObject implements Serializable {
                    List<OrderRow> orderRows,
                    String status,
                    String totalAmountInWords,
-                   String reducedVATNotification,
-                   List<Order> orders) {
+                   String reducedVATNotification) {
         this.invoiceNumber = invoiceNumber;
         this.invoiceDate = invoiceDate;
         this.dueDate = dueDate;
@@ -59,7 +57,6 @@ public class Invoice extends ValueObject implements Serializable {
         this.status = status;
         this.totalAmountInWords = totalAmountInWords;
         this.reducedVATNotification = reducedVATNotification;
-        this.orders = orders;
     }
 
     public String getInvoiceNumber() {
@@ -182,14 +179,6 @@ public class Invoice extends ValueObject implements Serializable {
         this.reducedVATNotification = reducedVATNotification;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
     @Override
     protected Object[] getIdFields() {
         return new Object[]{
@@ -207,8 +196,7 @@ public class Invoice extends ValueObject implements Serializable {
                 orderRows,
                 status,
                 totalAmountInWords,
-                reducedVATNotification,
-                orders
+                reducedVATNotification
         };
     }
 }

@@ -12,7 +12,10 @@ import java.util.List;
 /**
  * @author Rodion
  */
-public class OrderDaoImpl extends AbstractDao<OrderEntity, String> implements OrderDao {
+public class OrderDaoImpl { //extends AbstractDao<OrderEntity, String> implements OrderDao {
+
+    /*
+
     public OrderDaoImpl(MongoOperations mongoOperations) throws ClassNotFoundException {
         super(mongoOperations);
     }
@@ -63,4 +66,5 @@ public class OrderDaoImpl extends AbstractDao<OrderEntity, String> implements Or
         query.addCriteria(Criteria.where("userNumber").is(orderNumber));
         return mongoOperations.exists(query, entityClass);
     }
+     */
 }

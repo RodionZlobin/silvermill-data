@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
+    <!--
     <import resource="silvermill-data-mongo.xml"/>
 
     <bean id="abstractPropertyDao" abstract="true">
@@ -26,6 +28,9 @@
 
     <bean id="userDao" class="com.rodion.silvermilldata.dao.UserDaoImpl" parent="abstractPropertyDao"/>
 
+    -->
+
+    <mongo:repositories base-package="com.rodion.silvermilldata.dao"/>
 
 
 
