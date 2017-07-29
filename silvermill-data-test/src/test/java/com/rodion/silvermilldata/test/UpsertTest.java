@@ -1,18 +1,12 @@
 package com.rodion.silvermilldata.test;
 
-import com.rodion.silvermilldata.client.ProductClient;
-import com.rodion.silvermilldata.client.ProductClientImpl;
-import com.rodion.silvermilldata.client.UserClient;
-import com.rodion.silvermilldata.client.UserClientImpl;
+import com.rodion.silvermilldata.client.*;
+import com.rodion.silvermilldata.dao.CustomerDao;
 import com.rodion.silvermilldata.dao.ProductDao;
 import com.rodion.silvermilldata.dao.UserDao;
-import com.rodion.silvermilldata.domain.Product;
-import com.rodion.silvermilldata.domain.User;
+import com.rodion.silvermilldata.domain.*;
 import com.rodion.silvermilldata.entity.UserEntity;
-import com.rodion.silvermilldata.service.ProductService;
-import com.rodion.silvermilldata.service.ProductServiceImpl;
-import com.rodion.silvermilldata.service.UserService;
-import com.rodion.silvermilldata.service.UserServiceImpl;
+import com.rodion.silvermilldata.service.*;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -25,14 +19,55 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class UpsertTest {
 
-    public static ApplicationContext springContextRule = new ClassPathXmlApplicationContext(new ClassPathResource("silvermill-data-dao.xml").getPath());
+    public static ApplicationContext springContextRule = new ClassPathXmlApplicationContext("silvermill-data-config.xml");
+
+
+    @Ignore
+    @Test
+    public void tryUserServices(){
+        UserDao userDao = springContextRule.getBean(UserDao.class);
+        UserService userService = springContextRule.getBean(UserService.class);
+        UserClient userClient = springContextRule.getBean(UserClient.class);
+
+        User user = new User("U-1", "username1", "password1");
+
+        userClient.createOrUpdateUser(user);
+
+    }
+
+    @Ignore
+    @Test
+    public void tryCustomerServices(){
+        CustomerDao customerDao = springContextRule.getBean(CustomerDao.class);
+        CustomerService customerService = springContextRule.getBean(CustomerService.class);
+        CustomerClient customerClient = springContextRule.getBean(CustomerClient.class);
+
+        Address address = new Address("A-1", "addressname", "street", "building", "city", "zip", "country", "PO");
+        DeliveryAddress deliveryAddress= new DeliveryAddress("DA-1", "DA-name", "street", "building", "city", "zip", "country", "PO");
+
+        Customer customer = new Customer("C-1", "customername", "VAT", "rEG", address, deliveryAddress);
+
+        customerClient.createOrUpdateCustomer(customer);
+
+        Assert.assertEquals(1, customerClient.findAllCustomers().size());
+        Assert.assertEquals("C-1", customerClient.findByCustomerName("customername").getCustomerId());
+
+    }
+
+
 
     @Ignore
     @Test
     public void tryToUpsertUser(){
 
         UserDao userDao = springContextRule.getBean(UserDao.class);
-        UserService userService = new UserServiceImpl(userDao);
+        UserService userService = springContextRule.getBean(UserService.class);
+        UserClient userClient = springContextRule.getBean(UserClient.class);
+
+        //UserService userService = new UserServiceImpl(userDao);
+
+        /*
+
         UserClient userClient = new UserClientImpl(userService);
 
         User user1 = new User("1", "username1", "password1");
@@ -70,6 +105,7 @@ public class UpsertTest {
         userClient.createOrUpdateUser(user4);
 
         Assert.assertEquals(3, userClient.getAllUsers().size());
+         */
 
     }
 

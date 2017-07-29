@@ -9,7 +9,9 @@ import org.springframework.data.mongodb.core.query.Query;
 /**
  * @author Rodion
  */
-public class CustomerDaoImpl extends AbstractDao<CustomerEntity, String> implements CustomerDao {
+public class CustomerDaoImpl { //extends AbstractDao<CustomerEntity, String> implements CustomerDao {
+    /*
+
     public CustomerDaoImpl(MongoOperations mongoOperations) throws ClassNotFoundException {
         super(mongoOperations);
     }
@@ -27,4 +29,5 @@ public class CustomerDaoImpl extends AbstractDao<CustomerEntity, String> impleme
         query.addCriteria(Criteria.where("customerName").is(customerName));
         return mongoOperations.exists(query, entityClass);
     }
+     */
 }

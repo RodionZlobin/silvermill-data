@@ -8,7 +8,8 @@ import org.springframework.data.mongodb.core.query.Query;
 /**
  * @author Rodion
  */
-public class UserDaoImpl extends AbstractDao<UserEntity, String> implements UserDao  {
+public class UserDaoImpl { //extends AbstractDao<UserEntity, String> implements UserDao  {
+    /*
 
     public UserDaoImpl(MongoOperations mongoOperations) throws ClassNotFoundException {
         super(mongoOperations);
@@ -35,4 +36,5 @@ public class UserDaoImpl extends AbstractDao<UserEntity, String> implements User
         query.addCriteria(Criteria.where("username").is(username));
         return mongoOperations.exists(query, entityClass);
     }
+     */
 }

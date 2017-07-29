@@ -3,8 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--
     <bean id="userService" class="com.rodion.silvermilldata.service.UserServiceImpl">
         <constructor-arg ref="userDao"/>
     </bean>
+    -->
+    <bean id="userService" class="com.rodion.silvermilldata.service.UserServiceImpl" autowire="constructor"/>
+    <bean id="customerService" class="com.rodion.silvermilldata.service.CustomerServiceImpl" autowire="constructor"/>
+    <bean id="orderService" class="com.rodion.silvermilldata.service.OrderServiceImpl" autowire="constructor"/>
+    <bean id="productService" class="com.rodion.silvermilldata.service.ProductServiceImpl" autowire="constructor"/>
+
 
 </beans>

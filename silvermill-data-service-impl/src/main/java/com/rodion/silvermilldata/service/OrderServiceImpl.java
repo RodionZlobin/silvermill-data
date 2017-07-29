@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order createOrUpdateOrder(Order orderRequest) {
         OrderEntity orderEntity;
-        if(orderDao.isExists(orderRequest.getOrderNumber(), OrderEntity.class)){
+        if(orderDao.exists(orderRequest.getOrderNumber())){
             orderEntity = orderDao.findByOrderNumber(orderRequest.getOrderNumber());
 
         }
@@ -58,12 +58,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findByCustomer(Customer customer) {
-        return OrderDomainMapper.map(orderDao.findByCustomer(customer.getCustomerName()));
+        return OrderDomainMapper.map(orderDao.findByCustomerEntity(CustomerDomainMapper.map(customer)));
     }
 
     @Override
     public List<Order> findByCustomerAtPeriod(Customer customer, Date startDate, Date finalDate) {
-        return OrderDomainMapper.map(orderDao.findByCustomerAtPeriod(CustomerDomainMapper.map(customer), startDate, finalDate));
+        //return OrderDomainMapper.map(orderDao.findByCustomerAtPeriod(CustomerDomainMapper.map(customer), startDate, finalDate));
+        return null;
     }
 
     @Override
@@ -73,7 +74,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public DeliveryAddressEntity upsertDeliveryAddress(DeliveryAddress deliveryAddress){
-        deliveryAddressDao.upsert(DeliveryAddressDomainMapper.map(deliveryAddress));
+        deliveryAddressDao.save(DeliveryAddressDomainMapper.map(deliveryAddress));
         return deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId());
     }
 

@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer createOrUpdateCustomer(Customer customerRequest) {
 
         CustomerEntity customerEntity;
-        if(customerDao.isExists(customerRequest.getCustomerName(), CustomerEntity.class))
+        if(customerDao.exists(customerRequest.getCustomerName()))
         {
             //CustomerEntity customerEntityFromDB = customerDao.findByCustomerName(customerRequest.getCustomerName());
             //customerEntity = Updater.updateCustomerEntity(customerEntityFromDB, customerRequest);
@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         setAddresses(customerEntity, customerRequest);
 
-        return CustomerDomainMapper.map(customerDao.upsert(customerEntity));
+        return CustomerDomainMapper.map(customerDao.save(customerEntity));
     }
 
     @Override
@@ -66,13 +66,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public AddressEntity upsertAddress(Address address){
-        addressDao.upsert(AddressDomainMapper.map(address));
-        return addressDao.findByAddressID(address.getAddressId());
+        addressDao.save(AddressDomainMapper.map(address));
+        return addressDao.findByAddressId(address.getAddressId());
     }
 
     @Override
     public DeliveryAddressEntity upsertDeliveryAddress(DeliveryAddress deliveryAddress){
-        deliveryAddressDao.upsert(DeliveryAddressDomainMapper.map(deliveryAddress));
+        deliveryAddressDao.save(DeliveryAddressDomainMapper.map(deliveryAddress));
         return deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId());
     }
 

@@ -10,7 +10,10 @@ import java.util.List;
 /**
  * @author Rodion
  */
-public class OrderRowDaoImpl extends AbstractDao<OrderRowEntity, String> implements OrderRowDao {
+public class OrderRowDaoImpl { //extends AbstractDao<OrderRowEntity, String> implements OrderRowDao {
+
+    /*
+
     public OrderRowDaoImpl(MongoOperations mongoOperations) throws ClassNotFoundException {
         super(mongoOperations);
     }
@@ -21,4 +24,5 @@ public class OrderRowDaoImpl extends AbstractDao<OrderRowEntity, String> impleme
         query.addCriteria(Criteria.where("orderNumber").is(orderNumber));
         return mongoOperations.find(query, OrderRowEntity.class);
     }
+     */
 }

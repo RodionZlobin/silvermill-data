@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createOrUpdateUser(User userRequest) {
-
+        /*
         UserEntity userEntity;
         if(userDao.isExists(userRequest.getUserName(), UserEntity.class))
         {
@@ -41,8 +41,9 @@ public class UserServiceImpl implements UserService {
         else{
             userEntity = UserDomainMapper.map(userRequest);
         }
+        */
 
-        return UserDomainMapper.map(userDao.upsert(userEntity));
+        return UserDomainMapper.map(userDao.save(UserDomainMapper.map(userRequest)));
     }
 
     @Override

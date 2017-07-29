@@ -25,31 +25,24 @@ public class InvoiceDomainMapper {
                             invoiceEnity.getVATRate(),
                             invoiceEnity.getAmount(),
                             invoiceEnity.getTotalAmount(),
-                            //invoiceEnity.getOrderRows(),
-                            new ArrayList<OrderRow>(),
+                            OrderRowDomainMapper.mapOrderRawEntities(invoiceEnity.getOrderRows()),
                             invoiceEnity.getStatus(),
                             invoiceEnity.getTotalAmountInWords(),
-                            invoiceEnity.getReducedVATNotification(),
-                            //invoiceEnity.getOrders()
-                            new ArrayList<Order>());
+                            invoiceEnity.getReducedVATNotification());
     }
 
     public static InvoiceEntity map(Invoice invoice){
         return new InvoiceEntity(invoice.getInvoiceNumber(),
                                     invoice.getInvoiceDate(),
                                     invoice.getDueDate(),
-                                    CustomerDomainMapper.map(invoice.getCustomer()),
-                                    DeliveryAddressDomainMapper.map(invoice.getDeliveryAddress()),
                                     invoice.getDeliveryTerms(),
                                     invoice.getCountryOfOrigin(),
                                     invoice.getCurrency(),
                                     invoice.getVATRate(),
                                     invoice.getAmount(),
                                     invoice.getTotalAmount(),
-                                    new ArrayList<OrderRowEntity>(),
                                     invoice.getStatus(),
                                     invoice.getTotalAmountInWords(),
-                                    invoice.getReducedVATNotification(),
-                                    new ArrayList<OrderEntity>());
+                                    invoice.getReducedVATNotification());
     }
 }
