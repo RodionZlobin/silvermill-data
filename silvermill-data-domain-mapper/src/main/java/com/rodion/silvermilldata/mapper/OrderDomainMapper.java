@@ -19,7 +19,7 @@ public class OrderDomainMapper {
                             CustomerDomainMapper.map(entity.getCustomerEntity()),
                             DeliveryAddressDomainMapper.map(entity.getDeliveryAddressEntity()),
                             entity.getDeliveryTerms(),
-                            OrderRowDomainMapper.mapOrderRawEntities(entity.getOrderRows()),
+                            OrderRowDomainMapper.mapOrderRowEntities(entity.getOrderRows()),
                             entity.getCurrency(),
                             entity.getVATRate(),
                             entity.getAmount(),

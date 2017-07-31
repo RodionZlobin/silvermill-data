@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface OrderRowDao extends MongoRepository<OrderRowEntity, String>{ //extends GenericDao<OrderRowEntity, String> {
     List<OrderRowEntity> findByOrderNumber(String orderNumber);
+    List<OrderRowEntity> findByInvoiceNumber(String invoiceNumber);
 }

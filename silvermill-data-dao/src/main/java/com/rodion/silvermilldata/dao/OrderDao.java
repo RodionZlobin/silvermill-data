@@ -18,6 +18,4 @@ public interface OrderDao extends MongoRepository<OrderEntity, String>{//extends
     List<OrderEntity> findByCustomerEntityAndOrderDateBetween(CustomerEntity customerEntity, Date dateStart, Date dateFinal);
     List<OrderEntity> findByCustomerEntity(CustomerEntity customerEntity);
     List<OrderEntity> findByStatus(String orderStatus);
-
-    //List<OrderEntity> findByOrderDateBetween(dateStart, dateFinal); - extends MongoRepository, Spring AutoGen queries...
 }

@@ -13,7 +13,10 @@ import java.util.List;
 /**
  * @author Rodion
  */
-public class InvoiceDaoImpl extends AbstractDao<InvoiceEntity, String> implements InvoiceDao {
+public class InvoiceDaoImpl { //extends AbstractDao<InvoiceEntity, String> implements InvoiceDao {
+
+    /*
+
     public InvoiceDaoImpl(MongoOperations mongoOperations) throws ClassNotFoundException {
         super(mongoOperations);
     }
@@ -52,4 +55,5 @@ public class InvoiceDaoImpl extends AbstractDao<InvoiceEntity, String> implement
         query.addCriteria(Criteria.where("invoiceStatus").is(status));
         return mongoOperations.find(query, InvoiceEntity.class);
     }
+     */
 }

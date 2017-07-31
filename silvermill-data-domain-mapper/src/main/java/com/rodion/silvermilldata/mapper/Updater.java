@@ -16,12 +16,6 @@ public class Updater {
         return entity;
     }
 
-    public static CustomerEntity updateCustomerEntity(CustomerEntity entity, Customer customer) {
-        entity.setAddressEntity(AddressDomainMapper.map(customer.getAddress()));
-        entity.setDeliveryAddressEntity(DeliveryAddressDomainMapper.map(customer.getDeliveryAddress()));
-        return entity;
-    }
-
     public static ProductEntity updateProductEntity(ProductEntity entity, Product product){
         entity.setProductSalesPrice(product.getProductSalesPrice());
         entity.setProductQuantity(product.getProductQuantity());

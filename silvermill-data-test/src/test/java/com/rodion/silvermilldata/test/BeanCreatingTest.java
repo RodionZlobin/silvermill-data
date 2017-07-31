@@ -1,33 +1,76 @@
 package com.rodion.silvermilldata.test;
 
 import com.rodion.silvermilldata.client.*;
-import com.rodion.silvermilldata.dao.CustomerDao;
-import com.rodion.silvermilldata.dao.ProductDao;
-import com.rodion.silvermilldata.dao.UserDao;
+import com.rodion.silvermilldata.dao.*;
 import com.rodion.silvermilldata.domain.*;
-import com.rodion.silvermilldata.entity.UserEntity;
 import com.rodion.silvermilldata.service.*;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
 /**
  * @author Rodion
  */
-public class UpsertTest {
+public class BeanCreatingTest {
 
-    public static ApplicationContext springContextRule = new ClassPathXmlApplicationContext("silvermill-data-config.xml");
+    public static ApplicationContext springContext = new ClassPathXmlApplicationContext("silvermill-data-config.xml");
 
 
     @Ignore
     @Test
-    public void tryUserServices(){
-        UserDao userDao = springContextRule.getBean(UserDao.class);
-        UserService userService = springContextRule.getBean(UserService.class);
-        UserClient userClient = springContextRule.getBean(UserClient.class);
+    public void tryToCreateAllBeans(){
+
+        AddressDao addressDao = springContext.getBean(AddressDao.class);
+        CustomerDao customerDao = springContext.getBean(CustomerDao.class);
+        DeliveryAddressDao deliveryAddressDao = springContext.getBean(DeliveryAddressDao.class);
+        InvoiceDao invoiceDao = springContext.getBean(InvoiceDao.class);
+        OrderDao orderDao = springContext.getBean(OrderDao.class);
+        OrderRowDao orderRowDao = springContext.getBean(OrderRowDao.class);
+        ProductDao productDao = springContext.getBean(ProductDao.class);
+        UserDao userDao = springContext.getBean(UserDao.class);
+
+        CustomerService customerService = springContext.getBean(CustomerService.class);
+        InvoiceService invoiceService = springContext.getBean(InvoiceService.class);
+        OrderService orderService = springContext.getBean(OrderService.class);
+        ProductService productService = springContext.getBean(ProductService.class);
+        UserService userService = springContext.getBean(UserService.class);
+
+        CustomerClient customerClient = springContext.getBean(CustomerClient.class);
+        InvoiceClient invoiceClient = springContext.getBean(InvoiceClient.class);
+        OrderClient orderClient = springContext.getBean(OrderClient.class);
+        ProductClient productClient = springContext.getBean(ProductClient.class);
+        UserClient userClient = springContext.getBean(UserClient.class);
+
+        Assert.assertNotNull(addressDao);
+        Assert.assertNotNull(customerDao);
+        Assert.assertNotNull(deliveryAddressDao);
+        Assert.assertNotNull(invoiceDao);
+        Assert.assertNotNull(orderDao);
+        Assert.assertNotNull(orderRowDao);
+        Assert.assertNotNull(productDao);
+        Assert.assertNotNull(userDao);
+        Assert.assertNotNull(customerService);
+        Assert.assertNotNull(invoiceService);
+        Assert.assertNotNull(orderService);
+        Assert.assertNotNull(productService);
+        Assert.assertNotNull(userService);
+        Assert.assertNotNull(customerClient);
+        Assert.assertNotNull(invoiceClient);
+        Assert.assertNotNull(orderClient);
+        Assert.assertNotNull(productClient);
+        Assert.assertNotNull(userClient);
+
+    }
+
+
+    @Ignore
+    @Test
+    public void tryUserServices() {
+        UserDao userDao = springContext.getBean(UserDao.class);
+        UserService userService = springContext.getBean(UserService.class);
+        UserClient userClient = springContext.getBean(UserClient.class);
 
         User user = new User("U-1", "username1", "password1");
 
@@ -38,9 +81,9 @@ public class UpsertTest {
     @Ignore
     @Test
     public void tryCustomerServices(){
-        CustomerDao customerDao = springContextRule.getBean(CustomerDao.class);
-        CustomerService customerService = springContextRule.getBean(CustomerService.class);
-        CustomerClient customerClient = springContextRule.getBean(CustomerClient.class);
+        CustomerDao customerDao = springContext.getBean(CustomerDao.class);
+        CustomerService customerService = springContext.getBean(CustomerService.class);
+        CustomerClient customerClient = springContext.getBean(CustomerClient.class);
 
         Address address = new Address("A-1", "addressname", "street", "building", "city", "zip", "country", "PO");
         DeliveryAddress deliveryAddress= new DeliveryAddress("DA-1", "DA-name", "street", "building", "city", "zip", "country", "PO");
@@ -60,9 +103,9 @@ public class UpsertTest {
     @Test
     public void tryToUpsertUser(){
 
-        UserDao userDao = springContextRule.getBean(UserDao.class);
-        UserService userService = springContextRule.getBean(UserService.class);
-        UserClient userClient = springContextRule.getBean(UserClient.class);
+        UserDao userDao = springContext.getBean(UserDao.class);
+        UserService userService = springContext.getBean(UserService.class);
+        UserClient userClient = springContext.getBean(UserClient.class);
 
         //UserService userService = new UserServiceImpl(userDao);
 
@@ -113,7 +156,7 @@ public class UpsertTest {
     @Test
     public void tryToUpsertProduct(){
 
-        ProductDao productDao = springContextRule.getBean(ProductDao.class);
+        ProductDao productDao = springContext.getBean(ProductDao.class);
         ProductService productService = new ProductServiceImpl(productDao);
         ProductClient productClient = new ProductClientImpl(productService);
 

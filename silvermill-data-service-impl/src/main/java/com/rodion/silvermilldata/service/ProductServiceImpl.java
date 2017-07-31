@@ -5,6 +5,8 @@ import com.rodion.silvermilldata.domain.Product;
 import com.rodion.silvermilldata.entity.ProductEntity;
 import com.rodion.silvermilldata.mapper.ProductDomainMapper;
 import com.rodion.silvermilldata.mapper.Updater;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -12,6 +14,9 @@ import java.util.List;
  * @author Rodion
  */
 public class ProductServiceImpl implements ProductService {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
+
 
     private ProductDao productDao;
 
@@ -23,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
     public Product createOrUpdateProduct(Product productRequest) {
 
         ProductEntity productEntity;
-        if(productDao.exists(productRequest.getProductArticle()))
+        if(exists(productRequest))
         {
             ProductEntity productEntityFromDB = productDao.findByProductArticle(productRequest.getProductArticle());
             productEntity = Updater.updateProductEntity(productEntityFromDB, productRequest);
@@ -48,5 +53,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAllProducts() {
         return ProductDomainMapper.map(productDao.findAll());
+    }
+
+    private boolean exists(Product productRequest) {
+
+        ProductEntity productEntity;
+        try{
+            productEntity = productDao.findByProductArticle(productRequest.getProductArticle());
+
+        }
+        catch (Exception e){
+            LOGGER.error(String.format("Product '%s' is not exists", productRequest.getProductArticle()), e);
+            throw e;
+        }
+
+        return (productEntity != null);
     }
 }
