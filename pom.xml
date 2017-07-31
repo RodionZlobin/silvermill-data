@@ -20,6 +20,7 @@
         <module>silvermill-data-test</module>
         <module>silvermill-data-domain-mapper</module>
         <module>silvermill-data-client</module>
+        <module>silvermill-data-exception</module>
     </modules>
 
     <properties>
@@ -121,15 +122,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
-            <version>1.10.6.RELEASE</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
         </dependency>
 
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.10.6.RELEASE</version>
         </dependency>
 
     </dependencies>

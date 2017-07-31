@@ -15,6 +15,7 @@ public class OrderRowDomainMapper {
 
         return new OrderRow(entity.getOrderRowId(),
                 entity.getOrderNumber(),
+                entity.getInvoiceNumber(),
                 ProductDomainMapper.map(entity.getProduct()),
                 entity.getUnit(),
                 entity.getQuantity(),
@@ -26,6 +27,7 @@ public class OrderRowDomainMapper {
 
         return new OrderRowEntity(orderRow.getOrderRowId(),
                                     orderRow.getOrderNumber(),
+                                    orderRow.getInvoiceNumber(),
                                     ProductDomainMapper.map(orderRow.getProduct()),
                                     orderRow.getUnit(),
                                     orderRow.getQuantity(),
@@ -33,13 +35,13 @@ public class OrderRowDomainMapper {
                                     orderRow.getAmount());
     }
 
-    public static List<OrderRowEntity> mapOrderRaws(List<OrderRow> orderRows){
+    public static List<OrderRowEntity> mapOrderRows(List<OrderRow> orderRows){
         List<OrderRowEntity> entities = new ArrayList<>();
         orderRows.forEach(p -> entities.add(OrderRowDomainMapper.map(p)));
         return entities;
     }
 
-    public static List<OrderRow> mapOrderRawEntities(List<OrderRowEntity> entities){
+    public static List<OrderRow> mapOrderRowEntities(List<OrderRowEntity> entities){
         List<OrderRow> orderRows = new ArrayList<>();
         entities.forEach(p -> orderRows.add(OrderRowDomainMapper.map(p)));
         return orderRows;

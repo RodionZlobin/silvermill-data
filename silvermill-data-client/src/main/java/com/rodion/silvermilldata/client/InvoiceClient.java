@@ -1,4 +1,4 @@
-package com.rodion.silvermilldata.service;
+package com.rodion.silvermilldata.client;
 
 import com.rodion.silvermilldata.domain.Customer;
 import com.rodion.silvermilldata.domain.DeliveryAddress;
@@ -11,13 +11,12 @@ import java.util.List;
 /**
  * @author Rodion
  */
-public interface InvoiceService {
+public interface InvoiceClient {
 
-    Invoice findInvoiceByNumber(String orderNumber);
+    Invoice findInvoiceByNumber(String invoiceNumber);
     Invoice createOrUpdateInvoice(Invoice invoice);
     List<Invoice> findByCustomer(Customer customer);
     List<Invoice> findByCustomerAtPeriod(Customer customer, Date startDate, Date finalDate);
     List<Invoice> findByInvoiceStatus(String invoiceStatus);
     DeliveryAddress upsertDeliveryAddress(DeliveryAddress deliveryAddress);
-
 }

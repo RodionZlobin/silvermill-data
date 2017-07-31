@@ -4,14 +4,14 @@ import com.rodion.silvermilldata.dao.*;
 import com.rodion.silvermilldata.domain.Customer;
 import com.rodion.silvermilldata.domain.DeliveryAddress;
 import com.rodion.silvermilldata.domain.Order;
-import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
-import com.rodion.silvermilldata.entity.OrderEntity;
-import com.rodion.silvermilldata.entity.OrderRowEntity;
-import com.rodion.silvermilldata.entity.ProductEntity;
+import com.rodion.silvermilldata.domain.OrderRow;
+import com.rodion.silvermilldata.entity.*;
 import com.rodion.silvermilldata.mapper.CustomerDomainMapper;
 import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
 import com.rodion.silvermilldata.mapper.OrderDomainMapper;
 import com.rodion.silvermilldata.mapper.OrderRowDomainMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +20,8 @@ import java.util.List;
  * @author Rodion
  */
 public class OrderServiceImpl implements OrderService {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     private OrderDao orderDao;
     private DeliveryAddressDao deliveryAddressDao;
@@ -43,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order createOrUpdateOrder(Order orderRequest) {
         OrderEntity orderEntity;
-        if(orderDao.exists(orderRequest.getOrderNumber())){
+        if(exists(orderRequest)){
             orderEntity = orderDao.findByOrderNumber(orderRequest.getOrderNumber());
 
         }
@@ -52,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         setMetadata(orderEntity, orderRequest);
-        orderDao.insert(orderEntity);
+        orderDao.save(orderEntity);
         return orderRequest;
     }
 
@@ -63,8 +65,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findByCustomerAtPeriod(Customer customer, Date startDate, Date finalDate) {
-        //return OrderDomainMapper.map(orderDao.findByCustomerAtPeriod(CustomerDomainMapper.map(customer), startDate, finalDate));
-        return null;
+        CustomerEntity customerEntity = customerDao.findByCustomerName(customer.getCustomerName());
+
+        return OrderDomainMapper.map(orderDao.findByCustomerEntityAndOrderDateBetween(customerEntity, startDate, finalDate));
     }
 
     @Override
@@ -73,13 +76,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public DeliveryAddressEntity upsertDeliveryAddress(DeliveryAddress deliveryAddress){
+    public DeliveryAddress upsertDeliveryAddress(DeliveryAddress deliveryAddress){
         deliveryAddressDao.save(DeliveryAddressDomainMapper.map(deliveryAddress));
-        return deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId());
+        return DeliveryAddressDomainMapper.map(deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId()));
     }
 
     @Override
-    public void createOrderRows(Order orderRequest){
+    public List<OrderRow> createOrderRows(Order orderRequest){
 
         orderRequest.getOrderRows().forEach(p -> {
             ProductEntity productEntity = productDao.findByProductArticle(p.getProduct().getProductArticle());
@@ -87,13 +90,30 @@ public class OrderServiceImpl implements OrderService {
             orderRowEntity.setProduct(productEntity);
             orderRowDao.insert(orderRowEntity);
         });
+
+        return OrderRowDomainMapper.mapOrderRowEntities(orderRowDao.findByOrderNumber(orderRequest.getOrderNumber()));
     }
 
     private OrderEntity setMetadata(OrderEntity entity, Order order){
         entity.setDeliveryAddressEntity(deliveryAddressDao.findByDeliveryAddressId(order.getDeliveryAddress().getDeliveryAddressId()));
         entity.setCustomerEntity(customerDao.findByCustomerName(order.getCustomer().getCustomerName()));
-        createOrderRows(order);
-        entity.setOrderRows(orderRowDao.findByOrderNumber(order.getOrderNumber()));
+        //createOrderRows(order);
+        entity.setOrderRows(OrderRowDomainMapper.mapOrderRows(createOrderRows(order)));
         return entity;
+    }
+
+    private boolean exists(Order order) {
+
+        OrderEntity orderEntity;
+        try{
+            orderEntity = orderDao.findByOrderNumber(order.getOrderNumber());
+
+        }
+        catch (Exception e){
+            LOGGER.error(String.format("Order '%s' is not exists", order.getOrderNumber()), e);
+            throw e;
+        }
+
+        return (orderEntity != null);
     }
 }

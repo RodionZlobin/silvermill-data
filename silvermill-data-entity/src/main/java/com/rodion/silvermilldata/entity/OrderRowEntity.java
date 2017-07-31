@@ -21,6 +21,7 @@ public class OrderRowEntity extends IdEntity<String> implements Serializable {
 
     private String orderRowId;
     private String orderNumber;
+    private String invoiceNumber;
 
     @DBRef
     private ProductEntity product;
@@ -33,9 +34,10 @@ public class OrderRowEntity extends IdEntity<String> implements Serializable {
     protected OrderRowEntity() {
     }
 
-    public OrderRowEntity(String orderRowId, String orderNumber, String unit, Double quantity, Double price, Double amount) {
+    public OrderRowEntity(String orderRowId, String orderNumber, String invoiceNumber, String unit, Double quantity, Double price, Double amount) {
         this.orderRowId = orderRowId;
         this.orderNumber = orderNumber;
+        this.invoiceNumber = invoiceNumber;
         this.unit = unit;
         this.quantity = quantity;
         this.price = price;
@@ -43,9 +45,10 @@ public class OrderRowEntity extends IdEntity<String> implements Serializable {
     }
 
     @PersistenceConstructor
-    public OrderRowEntity(String orderRowId, String orderNumber, ProductEntity product, String unit, Double quantity, Double price, Double amount) {
+    public OrderRowEntity(String orderRowId, String orderNumber, String invoiceNumber, ProductEntity product, String unit, Double quantity, Double price, Double amount) {
         this.orderRowId = orderRowId;
         this.orderNumber = orderNumber;
+        this.invoiceNumber = invoiceNumber;
         this.product = product;
         this.unit = unit;
         this.quantity = quantity;
@@ -72,6 +75,14 @@ public class OrderRowEntity extends IdEntity<String> implements Serializable {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
     public ProductEntity getProduct() {
@@ -118,6 +129,7 @@ public class OrderRowEntity extends IdEntity<String> implements Serializable {
     public String toString() {
         return "OrderRowEntity{" +
                 "orderNumber=" + orderNumber +
+                "invoiceNumber" + invoiceNumber +
                 "product=" + product.getProductName() + product.getProductColor() +
                 ", unit=" + unit +
                 ", quantity=" + quantity +

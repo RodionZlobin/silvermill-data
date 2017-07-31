@@ -12,6 +12,8 @@ import com.rodion.silvermilldata.entity.DeliveryAddressEntity;
 import com.rodion.silvermilldata.mapper.AddressDomainMapper;
 import com.rodion.silvermilldata.mapper.CustomerDomainMapper;
 import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.List;
@@ -20,6 +22,9 @@ import java.util.List;
  * @author Rodion
  */
 public class CustomerServiceImpl implements CustomerService {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(CustomerServiceImpl.class);
+
 
     private CustomerDao customerDao;
     private AddressDao addressDao;
@@ -35,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer createOrUpdateCustomer(Customer customerRequest) {
 
         CustomerEntity customerEntity;
-        if(customerDao.exists(customerRequest.getCustomerName()))
+        if(exists(customerRequest))
         {
             //CustomerEntity customerEntityFromDB = customerDao.findByCustomerName(customerRequest.getCustomerName());
             //customerEntity = Updater.updateCustomerEntity(customerEntityFromDB, customerRequest);
@@ -81,5 +86,20 @@ public class CustomerServiceImpl implements CustomerService {
         entity.setDeliveryAddressEntity(upsertDeliveryAddress(customer.getDeliveryAddress()));
 
         return entity;
+    }
+
+    private boolean exists(Customer customerRequest) {
+
+        CustomerEntity customerEntity;
+        try{
+            customerEntity = customerDao.findByCustomerName(customerRequest.getCustomerName());
+
+        }
+        catch (Exception e){
+            LOGGER.error(String.format("Customer '%s' is not exists", customerRequest.getCustomerName()), e);
+            throw e;
+        }
+
+        return (customerEntity != null);
     }
 }

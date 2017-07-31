@@ -3,16 +3,16 @@ package com.rodion.silvermilldata.test;
 import com.rodion.silvermilldata.client.CustomerClient;
 import com.rodion.silvermilldata.client.CustomerClientImpl;
 import com.rodion.silvermilldata.client.UserClient;
-import com.rodion.silvermilldata.client.UserClientImpl;
 import com.rodion.silvermilldata.dao.*;
 import com.rodion.silvermilldata.domain.*;
-import com.rodion.silvermilldata.entity.*;
-import com.rodion.silvermilldata.mapper.*;
+import com.rodion.silvermilldata.mapper.CustomerDomainMapper;
+import com.rodion.silvermilldata.mapper.DeliveryAddressDomainMapper;
+import com.rodion.silvermilldata.mapper.ProductDomainMapper;
 import com.rodion.silvermilldata.service.*;
-import org.junit.*;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,19 +26,70 @@ public class ConnectionTest {
     //for best test use create / delete DB or TODO: create DB manually and drop after test
 
 
+    public static ApplicationContext springContext = new ClassPathXmlApplicationContext("silvermill-data-config.xml");
 
-    public static ApplicationContext springContextRule = new ClassPathXmlApplicationContext(new ClassPathResource("silvermill-data-dao.xml").getPath());
+
+    @Ignore
+    @Test
+    public void tryAllUserServices() {
+        UserDao userDao = springContext.getBean(UserDao.class);
+        UserService userService = springContext.getBean(UserService.class);
+        UserClient userClient = springContext.getBean(UserClient.class);
+
+        User user = new User("1", "username1", "password1");
+
+        userClient.createOrUpdateUser(user);
+
+
+
+        /*
+        Assert.assertEquals("1", userClient.findUserByUserId("1").getUserId());
+        Assert.assertEquals("username1", userClient.findUserByUsername("username1").getUserName());
+
+
+
+
+        User user2 = new User("2", "username1", "password2");
+        userClient.createOrUpdateUser(user2);
+
+        //Assert.assertEquals(1, userClient.getAllUsers().size());
+
+
+        //Assert.assertNull(userClient.findUserByUserId("2"));
+
+        User user3 = new User("3", "username3", "password1");
+        userClient.createOrUpdateUser(user3);
+
+        //Assert.assertNotNull(userClient.findUserByUserId("3"));
+        Assert.assertEquals("password1", userClient.findUserByUsername("username3").getPassword());
+        //Assert.assertEquals(2, userClient.getAllUsers().size());
+
+
+
+        User user4 = new User("1", "username1", "password4");
+        userClient.createOrUpdateUser(user4);
+        //Assert.assertNull(userClient.findUserByUsername("username4"));
+
+        Assert.assertEquals("password4", userClient.findUserByUserId("1").getPassword());
+        //Assert.assertEquals(2, userClient.getAllUsers().size());
+
+        User user5 = new User("5", "username1", "password5");
+        userClient.createOrUpdateUser(user5);
+         */
+
+
+    }
 
 
     @Ignore
     @Test
     public void experimentsWithOrder(){
-        OrderDao orderDao = springContextRule.getBean(OrderDao.class);
-        AddressDao addressDao = springContextRule.getBean(AddressDao.class);
-        DeliveryAddressDao deliveryAddressDao = springContextRule.getBean(DeliveryAddressDao.class);
-        OrderRowDao orderRowDao = springContextRule.getBean(OrderRowDao.class);
-        CustomerDao customerDao = springContextRule.getBean(CustomerDao.class);
-        ProductDao productDao = springContextRule.getBean(ProductDao.class);
+        OrderDao orderDao = springContext.getBean(OrderDao.class);
+        AddressDao addressDao = springContext.getBean(AddressDao.class);
+        DeliveryAddressDao deliveryAddressDao = springContext.getBean(DeliveryAddressDao.class);
+        OrderRowDao orderRowDao = springContext.getBean(OrderRowDao.class);
+        CustomerDao customerDao = springContext.getBean(CustomerDao.class);
+        ProductDao productDao = springContext.getBean(ProductDao.class);
 
 
         OrderService orderService = new OrderServiceImpl(orderDao, customerDao, deliveryAddressDao, orderRowDao, productDao);
@@ -55,8 +106,8 @@ public class ConnectionTest {
         productDao.insert(ProductDomainMapper.map(product2));
 
 
-        OrderRow orderRow1 = new OrderRow("R1", "O-1", product1, "pcs", 50.00, 10.00, 500.00);
-        OrderRow orderRow2 = new OrderRow("R2", "O-1", product2, "pcs", 100.00, 7.00, 700.00);
+        OrderRow orderRow1 = new OrderRow("R1", "O-1", "I-1", product1, "pcs", 50.00, 10.00, 500.00);
+        OrderRow orderRow2 = new OrderRow("R2", "O-1", "I-1", product2, "pcs", 100.00, 7.00, 700.00);
 
 
         List<OrderRow> orderRows = new ArrayList<>();
@@ -76,9 +127,9 @@ public class ConnectionTest {
     @Ignore
     @Test
     public void tryCreateCustomer(){
-        CustomerDao customerDao = springContextRule.getBean(CustomerDao.class);
-        AddressDao addressDao = springContextRule.getBean(AddressDao.class);
-        DeliveryAddressDao deliveryAddressDao = springContextRule.getBean(DeliveryAddressDao.class);
+        CustomerDao customerDao = springContext.getBean(CustomerDao.class);
+        AddressDao addressDao = springContext.getBean(AddressDao.class);
+        DeliveryAddressDao deliveryAddressDao = springContext.getBean(DeliveryAddressDao.class);
         CustomerService customerService = new CustomerServiceImpl(customerDao, addressDao, deliveryAddressDao);
         CustomerClient customerClient = new CustomerClientImpl(customerService);
 
@@ -106,11 +157,12 @@ public class ConnectionTest {
     }
 
 
+        /*
     @Ignore //prepare clear DB
     @Test
     public void tryCreateConnectionInsertAndRead(){
 
-        UserDao userDao = springContextRule.getBean(UserDao.class);
+        UserDao userDao = springContext.getBean(UserDao.class);
         UserService userService = new UserServiceImpl(userDao);
         UserClient userClient = new UserClientImpl(userService);
 
@@ -120,12 +172,13 @@ public class ConnectionTest {
         Assert.assertEquals("1", userClient.findUserByUserId("1").getUserId());
         Assert.assertEquals("username1", userClient.findUserByUsername("username1").getUserName());
 
-
+        */
         /*
         User user2 = new User("2", "username1", "password2");
         userClient.createOrUpdateUser(user2);
         Assert.assertNull(userClient.findUserByUserId("2"));
         */
+        /*
         User user3 = new User("3", "username3", "password1");
         userClient.createOrUpdateUser(user3);
         Assert.assertNotNull(userClient.findUserByUserId("3"));
@@ -143,7 +196,6 @@ public class ConnectionTest {
 
 
 
-        /*
         UserEntity user = new UserEntity("1","username", "password");
 
 
@@ -174,8 +226,8 @@ public class ConnectionTest {
         usersFromDB = userDao.findAll();
 
         Assert.assertEquals(2, usersFromDB.size());
-        */
 
     }
+        */
 
 }

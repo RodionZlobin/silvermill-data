@@ -1,7 +1,6 @@
 package com.rodion.silvermilldata.service;
 
 import com.rodion.silvermilldata.domain.User;
-import com.rodion.silvermilldata.entity.UserEntity;
 
 import java.util.List;
 

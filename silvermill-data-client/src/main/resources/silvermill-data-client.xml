@@ -19,4 +19,8 @@
         <constructor-arg ref="productService"/>
     </bean>
 
+    <bean id="invoiceClient" class="com.rodion.silvermilldata.client.InvoiceClientImpl">
+        <constructor-arg ref="invoiceService"/>
+    </bean>
+
 </beans>

@@ -17,17 +17,14 @@
         <dependency>
             <groupId>com.rodion</groupId>
             <artifactId>silvermill-data-dao</artifactId>
-            <version>${silvermill.version}</version>
         </dependency>
         <dependency>
             <groupId>com.rodion</groupId>
             <artifactId>silvermill-data-domain</artifactId>
-            <version>${silvermill.version}</version>
         </dependency>
         <dependency>
             <groupId>com.rodion</groupId>
             <artifactId>silvermill-data-entity</artifactId>
-            <version>${silvermill.version}</version>
         </dependency>
     </dependencies>
 
