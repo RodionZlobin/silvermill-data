@@ -12,9 +12,7 @@ import java.io.Serializable;
  */
 
 @Document(collection = "orderRows")
-public class OrderRowEntity extends IdEntity<String> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class OrderRowEntity extends IdEntity<String> {
 
     @Id
     private String id;

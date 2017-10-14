@@ -68,7 +68,7 @@ public abstract class ValueObject implements Serializable {
                 sb.append(",");
             }
 
-            sb.append(field == null?"null":field.toString());
+            sb.append(field == null ? "null" : field.toString());
         }
 
         return sb.toString();

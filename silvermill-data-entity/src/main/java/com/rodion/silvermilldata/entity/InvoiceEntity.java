@@ -15,9 +15,7 @@ import java.util.List;
  */
 
 @Document(collection = "invoices")
-public class InvoiceEntity extends IdEntity<String> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class InvoiceEntity extends IdEntity<String> {
 
     @Id
     private String id;

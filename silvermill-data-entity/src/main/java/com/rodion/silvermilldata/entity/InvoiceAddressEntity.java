@@ -6,14 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Rodion
  */
 
-@Document(collection = "deliveryAddresses")
-public class DeliveryAddressEntity extends AddressEntity {//IdEntity<String> {
+@Document(collection = "addresses")
+public class InvoiceAddressEntity extends AddressEntity {//IdEntity<String> {
 
-
-    public DeliveryAddressEntity() {
+    public InvoiceAddressEntity() {
     }
 
-    public DeliveryAddressEntity(String addressId, String addressName, String street, String building, String city, String zipCode, String country, String postBox) {
+    public InvoiceAddressEntity(String addressId, String addressName, String street, String building, String city, String zipCode, String country, String postBox) {
         super(addressId, addressName, street, building, city, zipCode, country, postBox);
     }
 
@@ -23,10 +22,10 @@ public class DeliveryAddressEntity extends AddressEntity {//IdEntity<String> {
         private String id;
 
         @Indexed(unique = true)
-        private String deliveryAddressId;
+        private String addressId;
 
         @Indexed(unique = true)
-        private String deliveryAddressName;
+        private String addressName;
 
         private String street;
         private String building;
@@ -35,12 +34,12 @@ public class DeliveryAddressEntity extends AddressEntity {//IdEntity<String> {
         private String country;
         private String postBox;
 
-        protected DeliveryAddressEntity(){}
+        protected InvoiceAddressEntity(){}
 
         @PersistenceConstructor
-        public DeliveryAddressEntity(String deliveryAddressId, String deliveryAddressName, String street, String building, String city, String zipCode, String country, String postBox) {
-            this.deliveryAddressId = deliveryAddressId;
-            this.deliveryAddressName = deliveryAddressName;
+        public InvoiceAddressEntity(String addressId, String addressName, String street, String building, String city, String zipCode, String country, String postBox) {
+            this.addressId = addressId;
+            this.addressName = addressName;
             this.street = street;
             this.building = building;
             this.city = city;
@@ -49,20 +48,20 @@ public class DeliveryAddressEntity extends AddressEntity {//IdEntity<String> {
             this.postBox = postBox;
         }
 
-        public String getDeliveryAddressId() {
-            return deliveryAddressId;
+        public String getAddressId() {
+            return addressId;
         }
 
-        public void setDeliveryAddressId(String deliveryAddressId) {
-            this.deliveryAddressId = deliveryAddressId;
+        public void setAddressId(String addressId) {
+            this.addressId = addressId;
         }
 
-        public String getDeliveryAddressName() {
-            return deliveryAddressName;
+        public String getAddressName() {
+            return addressName;
         }
 
-        public void setDeliveryAddressName(String deliveryAddressName) {
-            this.deliveryAddressName = deliveryAddressName;
+        public void setAddressName(String addressName) {
+            this.addressName = addressName;
         }
 
         public String getStreet() {
@@ -121,7 +120,7 @@ public class DeliveryAddressEntity extends AddressEntity {//IdEntity<String> {
          */
     @Override
     public String toString() {
-        return "DeliveryAddressEntity{" +
+        return "InvoiceAddressEntity{" +
                 "street='" + super.getStreet() + '\'' +
                 ", building='" + super.getBuilding() + '\'' +
                 ", city='" + super.getCity() + '\'' +

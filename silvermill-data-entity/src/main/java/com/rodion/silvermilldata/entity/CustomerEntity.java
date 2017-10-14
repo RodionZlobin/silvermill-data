@@ -6,16 +6,12 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
-
 /**
  * @author Rodion
  */
 
 @Document(collection = "customers")
-public class CustomerEntity extends IdEntity<String> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class CustomerEntity extends IdEntity<String> {
 
     @Id
     private String id;
@@ -33,7 +29,7 @@ public class CustomerEntity extends IdEntity<String> implements Serializable {
     private String customerRegNumber;
 
     @DBRef
-    private AddressEntity addressEntity;
+    private InvoiceAddressEntity invoiceAddressEntity;
 
     @DBRef
     private DeliveryAddressEntity deliveryAddressEntity;
@@ -49,12 +45,12 @@ public class CustomerEntity extends IdEntity<String> implements Serializable {
     }
 
     @PersistenceConstructor
-    public CustomerEntity(String customerId, String customerName, String customerVAT, String customerRegNumber, AddressEntity addressEntity, DeliveryAddressEntity deliveryAddressEntity) {
+    public CustomerEntity(String customerId, String customerName, String customerVAT, String customerRegNumber, InvoiceAddressEntity invoiceAddressEntity, DeliveryAddressEntity deliveryAddressEntity) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerVAT = customerVAT;
         this.customerRegNumber = customerRegNumber;
-        this.addressEntity = addressEntity;
+        this.invoiceAddressEntity = invoiceAddressEntity;
         this.deliveryAddressEntity = deliveryAddressEntity;
     }
 
@@ -90,12 +86,12 @@ public class CustomerEntity extends IdEntity<String> implements Serializable {
         this.customerRegNumber = customerRegNumber;
     }
 
-    public AddressEntity getAddressEntity() {
-        return addressEntity;
+    public InvoiceAddressEntity getInvoiceAddressEntity() {
+        return invoiceAddressEntity;
     }
 
-    public void setAddressEntity(AddressEntity addressEntity) {
-        this.addressEntity = addressEntity;
+    public void setInvoiceAddressEntity(InvoiceAddressEntity invoiceAddressEntity) {
+        this.invoiceAddressEntity = invoiceAddressEntity;
     }
 
     public DeliveryAddressEntity getDeliveryAddressEntity() {
@@ -118,7 +114,7 @@ public class CustomerEntity extends IdEntity<String> implements Serializable {
                 ", customerName='" + customerName + '\'' +
                 ", customerVAT='" + customerVAT + '\'' +
                 ", customerRegNumber='" + customerRegNumber + '\'' +
-                ", addressEntity=" + addressEntity +
+                ", invoiceAddressEntity=" + invoiceAddressEntity +
                 ", deliveryAddressEntity=" + deliveryAddressEntity +
                 '}';
     }

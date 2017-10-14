@@ -1,14 +1,18 @@
 package com.rodion.silvermilldata.mapper;
 
-import com.rodion.silvermilldata.domain.Address;
-import com.rodion.silvermilldata.entity.AddressEntity;
+import com.rodion.silvermilldata.domain.InvoiceAddress;
+import com.rodion.silvermilldata.entity.InvoiceAddressEntity;
 
 /**
  * @author Rodion
  */
-public class AddressDomainMapper {
-    public static Address map(AddressEntity entity){
-        return new Address(entity.getAddressId(),
+public final class InvoiceAddressDomainMapper {
+
+    private InvoiceAddressDomainMapper(){}
+
+    public static InvoiceAddress map(InvoiceAddressEntity entity){
+        return entity == null ? null :
+                new InvoiceAddress(entity.getAddressId(),
                             entity.getAddressName(),
                             entity.getStreet(),
                             entity.getBuilding(),
@@ -18,9 +22,10 @@ public class AddressDomainMapper {
                             entity.getPostBox());
     }
 
-    public static AddressEntity map(Address address){
+    public static InvoiceAddressEntity map(InvoiceAddress address){
 
-        return new AddressEntity(address.getAddressId(),
+        return address == null ? null :
+                new InvoiceAddressEntity(address.getAddressId(),
                                     address.getAddressName(),
                                     address.getStreet(),
                                     address.getBuilding(),

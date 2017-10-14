@@ -12,7 +12,7 @@
     </bean>
 
 
-    <bean id="addressDao" class="com.rodion.silvermilldata.dao.AddressDaoImpl" parent="abstractPropertyDao"/>
+    <bean invoiceAddressDaosDao" class="com.rodion.silvermilldata.dao.AddressDaoImpl" parent="abstractPropertyDao"/>
 
     <bean id="customerDao" class="com.rodion.silvermilldata.dao.CustomerDaoImpl" parent="abstractPropertyDao"/>
 

@@ -8,7 +8,10 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import javax.inject.Inject;
 
 /**
  * @author Rodion
@@ -17,12 +20,11 @@ public class BeanCreatingTest {
 
     public static ApplicationContext springContext = new ClassPathXmlApplicationContext("silvermill-data-config.xml");
 
-
     @Ignore
     @Test
     public void tryToCreateAllBeans(){
 
-        AddressDao addressDao = springContext.getBean(AddressDao.class);
+        InvoiceAddressDao invoiceAddressDao = springContext.getBean(InvoiceAddressDao.class);
         CustomerDao customerDao = springContext.getBean(CustomerDao.class);
         DeliveryAddressDao deliveryAddressDao = springContext.getBean(DeliveryAddressDao.class);
         InvoiceDao invoiceDao = springContext.getBean(InvoiceDao.class);
@@ -43,7 +45,7 @@ public class BeanCreatingTest {
         ProductClient productClient = springContext.getBean(ProductClient.class);
         UserClient userClient = springContext.getBean(UserClient.class);
 
-        Assert.assertNotNull(addressDao);
+        Assert.assertNotNull(invoiceAddressDao);
         Assert.assertNotNull(customerDao);
         Assert.assertNotNull(deliveryAddressDao);
         Assert.assertNotNull(invoiceDao);
@@ -85,7 +87,7 @@ public class BeanCreatingTest {
         CustomerService customerService = springContext.getBean(CustomerService.class);
         CustomerClient customerClient = springContext.getBean(CustomerClient.class);
 
-        Address address = new Address("A-1", "addressname", "street", "building", "city", "zip", "country", "PO");
+        InvoiceAddress address = new InvoiceAddress("A-1", "addressname", "street", "building", "city", "zip", "country", "PO");
         DeliveryAddress deliveryAddress= new DeliveryAddress("DA-1", "DA-name", "street", "building", "city", "zip", "country", "PO");
 
         Customer customer = new Customer("C-1", "customername", "VAT", "rEG", address, deliveryAddress);
