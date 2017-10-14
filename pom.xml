@@ -110,12 +110,6 @@
                 <version>${fasterxml.jackson.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>1</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
