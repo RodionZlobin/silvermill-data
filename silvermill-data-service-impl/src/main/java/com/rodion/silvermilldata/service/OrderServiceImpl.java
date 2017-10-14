@@ -78,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public DeliveryAddress upsertDeliveryAddress(DeliveryAddress deliveryAddress){
         deliveryAddressDao.save(DeliveryAddressDomainMapper.map(deliveryAddress));
-        return DeliveryAddressDomainMapper.map(deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId()));
+        return DeliveryAddressDomainMapper.map(deliveryAddressDao.findByAddressId(deliveryAddress.getAddressId()));
     }
 
     @Override
@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private OrderEntity setMetadata(OrderEntity entity, Order order){
-        entity.setDeliveryAddressEntity(deliveryAddressDao.findByDeliveryAddressId(order.getDeliveryAddress().getDeliveryAddressId()));
+        entity.setDeliveryAddressEntity(deliveryAddressDao.findByAddressId(order.getDeliveryAddress().getAddressId()));
         entity.setCustomerEntity(customerDao.findByCustomerName(order.getCustomer().getCustomerName()));
         //createOrderRows(order);
         entity.setOrderRows(OrderRowDomainMapper.mapOrderRows(createOrderRows(order)));

@@ -13,14 +13,14 @@ public class Customer extends ValueObject implements Serializable {
     private String customerName;
     private String customerVAT;
     private String customerRegNumber;
-    private Address address;
+    private InvoiceAddress address;
     private DeliveryAddress deliveryAddress;
 
     public Customer(String customerId,
                     String customerName,
                     String customerVAT,
                     String customerRegNumber,
-                    Address address,
+                    InvoiceAddress address,
                     DeliveryAddress deliveryAddress) {
         this.customerId = customerId;
         this.customerName = customerName;
@@ -62,11 +62,11 @@ public class Customer extends ValueObject implements Serializable {
         this.customerRegNumber = customerRegNumber;
     }
 
-    public Address getAddress() {
+    public InvoiceAddress getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(InvoiceAddress address) {
         this.address = address;
     }
 

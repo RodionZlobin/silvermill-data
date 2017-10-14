@@ -1,19 +1,22 @@
 package com.rodion.silvermilldata.mapper;
 
 import com.rodion.silvermilldata.domain.Order;
-import com.rodion.silvermilldata.domain.OrderRow;
 import com.rodion.silvermilldata.entity.OrderEntity;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Rodion
  */
-public class OrderDomainMapper {
+public final class OrderDomainMapper {
+
+    private OrderDomainMapper(){}
 
     public static Order map(OrderEntity entity){
-        return new Order(entity.getOrderNumber(),
+        return entity == null ? null :
+                new Order(entity.getOrderNumber(),
                             entity.getOrderDate(),
                             entity.getPaymentTerms(),
                             CustomerDomainMapper.map(entity.getCustomerEntity()),
@@ -28,7 +31,8 @@ public class OrderDomainMapper {
     }
 
     public static OrderEntity map(Order order){
-        return new OrderEntity(order.getOrderNumber(),
+        return order == null ? null :
+                new OrderEntity(order.getOrderNumber(),
                                 order.getOrderDate(),
                                 order.getPaymentTerms(),
                                 order.getDeliveryTerms(),
@@ -40,9 +44,8 @@ public class OrderDomainMapper {
                                 );
     }
 
-    public static List<Order> map(List<OrderEntity> entities){
-        List<Order> orders = new ArrayList<>();
-        entities.forEach(p -> orders.add(OrderDomainMapper.map(p)));
-        return orders;
+    public static List<Order> map(Collection<OrderEntity> entities){
+
+        return entities == null ? null : entities.stream().map(OrderDomainMapper::map).collect(Collectors.toList());
     }
 }

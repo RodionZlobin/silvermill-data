@@ -100,7 +100,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     private InvoiceEntity setMetadata(InvoiceEntity entity, Invoice invoice){
-        entity.setDeliveryAddressEntity(deliveryAddressDao.findByDeliveryAddressId(invoice.getDeliveryAddress().getDeliveryAddressId()));
+        entity.setDeliveryAddressEntity(deliveryAddressDao.findByAddressId(invoice.getDeliveryAddress().getAddressId()));
         entity.setCustomerEntity(customerDao.findByCustomerName(invoice.getCustomer().getCustomerName()));
         //createOrderRows(invoice);
         entity.setOrderRows(OrderRowDomainMapper.mapOrderRows(createOrderRows(invoice)));
@@ -110,7 +110,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public DeliveryAddress upsertDeliveryAddress(DeliveryAddress deliveryAddress){
         deliveryAddressDao.save(DeliveryAddressDomainMapper.map(deliveryAddress));
-        return DeliveryAddressDomainMapper.map(deliveryAddressDao.findByDeliveryAddressId(deliveryAddress.getDeliveryAddressId()));
+        return DeliveryAddressDomainMapper.map(deliveryAddressDao.findByAddressId(deliveryAddress.getAddressId()));
     }
 
     private List<OrderRow> createOrderRows(Invoice invoice){

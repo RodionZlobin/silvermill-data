@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author Rodion
  */
-public class Invoice extends ValueObject implements Serializable {
+public class Invoice extends ValueObject {
 
     private static final long serialVersionUID = 1L;
 

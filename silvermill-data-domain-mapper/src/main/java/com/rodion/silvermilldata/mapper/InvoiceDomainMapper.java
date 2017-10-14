@@ -1,21 +1,22 @@
 package com.rodion.silvermilldata.mapper;
 
 import com.rodion.silvermilldata.domain.Invoice;
-import com.rodion.silvermilldata.domain.Order;
-import com.rodion.silvermilldata.domain.OrderRow;
 import com.rodion.silvermilldata.entity.InvoiceEntity;
-import com.rodion.silvermilldata.entity.OrderEntity;
-import com.rodion.silvermilldata.entity.OrderRowEntity;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Rodion
  */
-public class InvoiceDomainMapper {
+public final class InvoiceDomainMapper {
+
+    private InvoiceDomainMapper(){}
+
     public static Invoice map(InvoiceEntity invoiceEnity){
-        return new Invoice(invoiceEnity.getInvoiceNumber(),
+        return invoiceEnity == null ? null :
+                new Invoice(invoiceEnity.getInvoiceNumber(),
                             invoiceEnity.getInvoiceDate(),
                             invoiceEnity.getDueDate(),
                             CustomerDomainMapper.map(invoiceEnity.getCustomerEntity()),
@@ -33,7 +34,8 @@ public class InvoiceDomainMapper {
     }
 
     public static InvoiceEntity map(Invoice invoice){
-        return new InvoiceEntity(invoice.getInvoiceNumber(),
+        return invoice == null ? null :
+                new InvoiceEntity(invoice.getInvoiceNumber(),
                                     invoice.getInvoiceDate(),
                                     invoice.getDueDate(),
                                     invoice.getDeliveryTerms(),
@@ -47,9 +49,9 @@ public class InvoiceDomainMapper {
                                     invoice.getReducedVATNotification());
     }
 
-    public static List<Invoice> map(List<InvoiceEntity> entities){
-        List<Invoice> invoices = new ArrayList<>();
-        entities.forEach(p -> invoices.add(InvoiceDomainMapper.map(p)));
-        return invoices;
+    public static List<Invoice> map(Collection<InvoiceEntity> entities){
+
+        return entities == null ? null : entities.stream().map(InvoiceDomainMapper::map).collect(Collectors.toList());
     }
+
 }

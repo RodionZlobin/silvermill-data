@@ -85,7 +85,7 @@ public class ConnectionTest {
     @Test
     public void experimentsWithOrder(){
         OrderDao orderDao = springContext.getBean(OrderDao.class);
-        AddressDao addressDao = springContext.getBean(AddressDao.class);
+        InvoiceAddressDao invoiceAddressDao = springContext.getBean(InvoiceAddressDao.class);
         DeliveryAddressDao deliveryAddressDao = springContext.getBean(DeliveryAddressDao.class);
         OrderRowDao orderRowDao = springContext.getBean(OrderRowDao.class);
         CustomerDao customerDao = springContext.getBean(CustomerDao.class);
@@ -94,7 +94,7 @@ public class ConnectionTest {
 
         OrderService orderService = new OrderServiceImpl(orderDao, customerDao, deliveryAddressDao, orderRowDao, productDao);
 
-        Address address = new Address("1", "address", "street", "build", "city", "zip", "country", "PO");
+        InvoiceAddress address = new InvoiceAddress("1", "address", "street", "build", "city", "zip", "country", "PO");
         DeliveryAddress deliveryAddress = new DeliveryAddress("10", "delivery", "dstreet", "delbuild", "delcity", "delzip", "delcountry", "delPO");
         Customer customer = new Customer("C1", "c-name", "vat", "reg", address, deliveryAddress);
         Product product1 = new Product("1", "FP-374-R", "Sparta", "red", 0.10,1000);
@@ -128,13 +128,13 @@ public class ConnectionTest {
     @Test
     public void tryCreateCustomer(){
         CustomerDao customerDao = springContext.getBean(CustomerDao.class);
-        AddressDao addressDao = springContext.getBean(AddressDao.class);
+        InvoiceAddressDao invoiceAddressDao = springContext.getBean(InvoiceAddressDao.class);
         DeliveryAddressDao deliveryAddressDao = springContext.getBean(DeliveryAddressDao.class);
-        CustomerService customerService = new CustomerServiceImpl(customerDao, addressDao, deliveryAddressDao);
+        CustomerService customerService = new CustomerServiceImpl(customerDao, invoiceAddressDao, deliveryAddressDao);
         CustomerClient customerClient = new CustomerClientImpl(customerService);
 
 
-        Address address = new Address("1", "address", "street", "build", "city", "zip", "country", "PO");
+        InvoiceAddress address = new InvoiceAddress("1", "address", "street", "build", "city", "zip", "country", "PO");
         DeliveryAddress deliveryAddress = new DeliveryAddress("10", "delivery", "dstreet", "delbuild", "delcity", "delzip", "delcountry", "delPO");
 
         Customer customer = new Customer("C1", "c-name", "vat", "reg", address, deliveryAddress);
@@ -143,10 +143,10 @@ public class ConnectionTest {
 
         /*
 
-        addressDao.insert(AddressDomainMapper.map(address));
+        invoiceAddressDao.insert(InvoiceAddressDomainMapper.map(address));
         deliveryAddressDao.insert(DeliveryAddressDomainMapper.map(deliveryAddress));
 
-        AddressEntity addressEntity = addressDao.findByAddressID("1");
+        InvoiceAddressEntity addressEntity = invoiceAddressDao.findByAddressID("1");
         DeliveryAddressEntity deliveryAddressEntity = deliveryAddressDao.findByDeliveryAddressId("10");
 
         CustomerEntity customer = new CustomerEntity("C1", "cname", "vat", "reg", addressEntity, deliveryAddressEntity);

@@ -3,18 +3,11 @@ package com.rodion.silvermilldata.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
 
 /**
- * @author Rodion
+ * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
  */
-
-@Document(collection = "addresses")
-public class AddressEntity extends IdEntity<String> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public abstract class AddressEntity extends IdEntity<String> {
 
     @Id
     private String id;
@@ -118,8 +111,7 @@ public class AddressEntity extends IdEntity<String> implements Serializable {
     @Override
     public String toString() {
         return "AddressEntity{" +
-                "addressName='" + addressName + '\'' +
-                ", street='" + street + '\'' +
+                "street='" + street + '\'' +
                 ", building='" + building + '\'' +
                 ", city='" + city + '\'' +
                 ", zipCode='" + zipCode + '\'' +

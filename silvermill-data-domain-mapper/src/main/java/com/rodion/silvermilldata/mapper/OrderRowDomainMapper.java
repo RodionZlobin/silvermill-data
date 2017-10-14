@@ -3,29 +3,35 @@ package com.rodion.silvermilldata.mapper;
 import com.rodion.silvermilldata.domain.OrderRow;
 import com.rodion.silvermilldata.entity.OrderRowEntity;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Rodion
  */
-public class OrderRowDomainMapper {
+public final class OrderRowDomainMapper {
+
+    private OrderRowDomainMapper() {
+    }
 
     public static OrderRow map(OrderRowEntity entity){
 
-        return new OrderRow(entity.getOrderRowId(),
-                entity.getOrderNumber(),
-                entity.getInvoiceNumber(),
-                ProductDomainMapper.map(entity.getProduct()),
-                entity.getUnit(),
-                entity.getQuantity(),
-                entity.getPrice(),
-                entity.getAmount());
+        return entity == null ? null :
+                new OrderRow(entity.getOrderRowId(),
+                                entity.getOrderNumber(),
+                                entity.getInvoiceNumber(),
+                                ProductDomainMapper.map(entity.getProduct()),
+                                entity.getUnit(),
+                                entity.getQuantity(),
+                                entity.getPrice(),
+                                entity.getAmount());
     }
 
     public static OrderRowEntity map(OrderRow orderRow){
 
-        return new OrderRowEntity(orderRow.getOrderRowId(),
+        return orderRow == null ? null :
+                new OrderRowEntity(orderRow.getOrderRowId(),
                                     orderRow.getOrderNumber(),
                                     orderRow.getInvoiceNumber(),
                                     ProductDomainMapper.map(orderRow.getProduct()),
@@ -35,16 +41,14 @@ public class OrderRowDomainMapper {
                                     orderRow.getAmount());
     }
 
-    public static List<OrderRowEntity> mapOrderRows(List<OrderRow> orderRows){
-        List<OrderRowEntity> entities = new ArrayList<>();
-        orderRows.forEach(p -> entities.add(OrderRowDomainMapper.map(p)));
-        return entities;
+    public static List<OrderRowEntity> mapOrderRows(Collection<OrderRow> orderRows){
+
+        return orderRows == null ? null : orderRows.stream().map(OrderRowDomainMapper::map).collect(Collectors.toList());
     }
 
-    public static List<OrderRow> mapOrderRowEntities(List<OrderRowEntity> entities){
-        List<OrderRow> orderRows = new ArrayList<>();
-        entities.forEach(p -> orderRows.add(OrderRowDomainMapper.map(p)));
-        return orderRows;
+    public static List<OrderRow> mapOrderRowEntities(Collection<OrderRowEntity> entities){
+
+        return entities == null ? null : entities.stream().map(OrderRowDomainMapper::map).collect(Collectors.toList());
     }
 
 }

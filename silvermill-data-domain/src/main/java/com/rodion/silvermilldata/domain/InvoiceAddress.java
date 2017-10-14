@@ -1,9 +1,17 @@
 package com.rodion.silvermilldata.domain;
 
 /**
- * @author Rodion Zlobin {@literal <mailto:rodion.zlobin@so4it.com/>}.
+ * @author Rodion
  */
-public abstract class Address extends ValueObject {
+public class InvoiceAddress extends Address{ //ValueObject {
+
+    public InvoiceAddress(String addressId, String addressName, String street, String building, String city, String zipCode, String country, String postBox) {
+        super(addressId, addressName, street, building, city, zipCode, country, postBox);
+    }
+
+
+    /*
+
     private static final long serialVersionUID = 1L;
 
     private String addressId;
@@ -15,7 +23,7 @@ public abstract class Address extends ValueObject {
     private String country;
     private String postBox;
 
-    public Address(String addressId, String addressName, String street, String building, String city, String zipCode, String country, String postBox) {
+    public InvoiceAddress(String addressId, String addressName, String street, String building, String city, String zipCode, String country, String postBox) {
         this.addressId = addressId;
         this.addressName = addressName;
         this.street = street;
@@ -94,4 +102,5 @@ public abstract class Address extends ValueObject {
     protected Object[] getIdFields() {
         return new Object[]{addressId, addressName, street, building, city, zipCode, country, postBox};
     }
+     */
 }

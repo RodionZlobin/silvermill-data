@@ -10,7 +10,7 @@ import java.util.Objects;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
-public abstract class IdEntity<T> implements Serializable {
+public abstract class IdEntity<T> {
     private static final long serialVersionUID = 1L;
 
     public IdEntity() {

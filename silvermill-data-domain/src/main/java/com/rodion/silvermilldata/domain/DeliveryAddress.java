@@ -5,18 +5,26 @@ import java.io.Serializable;
 /**
  * @author Rodion
  */
-public class DeliveryAddress extends ValueObject implements Serializable {
+public class DeliveryAddress extends Address {//extends ValueObject {
 
-    private static final long serialVersionUID = 1L;
+    public DeliveryAddress(String addressId, String addressName, String street, String building, String city, String zipCode, String country, String postBox) {
+        super(addressId, addressName, street, building, city, zipCode, country, postBox);
+    }
+
+
+
+    /*
+
+        private static final long serialVersionUID = 1L;
 
     private String deliveryAddressId;
-    private String deliveryAddressName;
-    private String street;
-    private String building;
-    private String city;
-    private String zipCode;
-    private String country;
-    private String postBox;
+        private String deliveryAddressName;
+        private String street;
+        private String building;
+        private String city;
+        private String zipCode;
+        private String country;
+        private String postBox;
 
     public DeliveryAddress(String deliveryAddressId, String deliveryAddressName, String street, String building, String city, String zipCode, String country, String postBox) {
         this.deliveryAddressId = deliveryAddressId;
@@ -97,4 +105,5 @@ public class DeliveryAddress extends ValueObject implements Serializable {
     protected Object[] getIdFields() {
         return new Object[]{deliveryAddressId, deliveryAddressName, street, building, city, zipCode, country, postBox};
     }
+         */
 }

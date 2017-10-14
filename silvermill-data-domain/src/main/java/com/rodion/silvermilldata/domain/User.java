@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author Rodion
  */
-public class User extends ValueObject implements Serializable{
+public class User extends ValueObject {
 
     private static final long serialVersionUID = 1L;
 
